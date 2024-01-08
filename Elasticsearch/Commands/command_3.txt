@@ -1,0 +1,36 @@
+#bulk verion of command 2 (e.g. send multiple documents, one for each age group)
+
+POST /vaccinations/_bulk?pipeline=automatic_region_enrich
+{ "create":{ "_index": "vaccinations"} }
+{"administration_date": "2022-01-08","supplier": "Moderna","area": "EMR","age_group": "50-59","male_count": 10,"female_count": 20,"first_doses": 10,"second_doses": 10,"post_infection_doses": 5,"booster_doses": 5}
+{ "create":{ "_index": "vaccinations"} }
+{"administration_date": "2022-01-08","supplier": "Moderna","area": "EMR","age_group": "60-69","male_count": 10,"female_count": 20,"first_doses": 10,"second_doses": 10,"post_infection_doses": 5,"booster_doses": 5}
+
+#parametrized version:
+{ "create":{ "_index": "vaccinations"} }
+{"administration_date": "{{administration_date}}","supplier": "{{supplier}}","area": "{{area}}","age_group": "{{age group}}","male_count": {{male count}},"female_count": {{female count}},"first_doses": {{first doses}},"second_doses": {{second doses}},"post_infection_doses": {{post infection doses}},"booster_doses": {{booster doses}}}
+{ "create":{ "_index": "vaccinations"} }
+{"administration_date": "{{administration_date}}","supplier": "{{supplier}}","area": "{{area}}","age_group": "{{age group}}","male_count": {{male count}},"female_count": {{female count}},"first_doses": {{first doses}},"second_doses": {{second doses}},"post_infection_doses": {{post infection doses}},"booster_doses": {{booster doses}}}
+
+
+#to test the result:
+GET /vaccinations/_search
+{
+  "query": {
+    "bool": {
+      "filter": [
+        {"range": {
+          "administration_date": {
+            "gte": "2022-01-08",
+            "lte": "2022-01-08"
+          }
+        }},
+        {
+          "term": {
+            "area": "EMR"
+          }
+        }
+      ]
+    }
+  }
+}

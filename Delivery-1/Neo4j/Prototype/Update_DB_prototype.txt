@@ -1,0 +1,77 @@
+//given an ID and a test (date and result) creates the DOES relationship
+
+:param date => "YYYY-MM-DDTHH:MM:SS"
+:param result => "positive"
+:param code => "00"
+
+CREATE (t: Test {date: datetime($date), result: $result})
+
+MATCH (p: Person)
+WHERE p.code = $code
+CREATE p - [:DOES] -> t
+RETURN p.name AS name, t.result AS status
+
+-------------------------------------------------------
+-------------------------------------------------------
+
+//given an ID and a date creates the relationship TAKES for the vaccination
+
+:param code => "00"
+:param date => "YYYY-MM-DDTHH:MM:SS"
+
+MATCH (p: Person)
+WHERE p.code = $code
+CREATE (p) - [:TAKES] -> (v: Vaccine {date: datetime($date)})
+
+-------------------------------------------------------
+-------------------------------------------------------
+//given two IDs creates the MEET relationship between the two people
+
+:param code1 => "00"
+:param code2 => "01"
+:param date => "YYYY-MM-DDTHH:MM:SS"
+
+MATCH 
+	(p1: Person)
+	(p2: Person)
+WHERE p1.code = $code1 AND p2.id = $code2
+CREATE p1 <- [c: MEETS {date: datetime($date)] -> p2
+
+-------------------------------------------------------
+-------------------------------------------------------
+//a person takes a new job. It's gien the old colleague sphere as a parameters list and the list of the new colleagues
+the query sets the endDate of the ex_colleagues frequentation and creates the relationships with the new_colleague, if it's needed. 
+Could be done for all kinds of FREQUENTS relationships (coworkers, housemates, friends, classmates, ..) 
+
+: param ex_colleagues => ["code1", "code2", "code3", ...]
+: param new_colleagues => ["code4", "code5", "code6", ...]
+: param code => "00"
+: param date => "YYYY-MM-DDTHH:MM:SS"
+
+MATCH (p: Person) -[f:FREQUENTS]- (p1)
+WHERE p.code = $code AND p1.code IN $ex_colleagues AND f.end_Date IS null
+SET f.end_Date = datetime($date)
+
+MATCH (p: Person)
+MATCH (p1: Person) WHERE p1.code IN $new_colleagues
+OPTIONAL MATCH (p) - [f:FREQUENTS] - (p1)
+WHERE f.end_date IS null
+WITH p,p1,f
+WHERE f IS null
+CREATE (p) - [:FREQUENTS{begin_date: datetime($date)}] -> (p1)
+
+-------------------------------------------------------
+-------------------------------------------------------
+
+//new event with given name, begin and end time. Given a list of people and their begin and end time creates the PARTECIPATES relationship
+
+:param event => {name: "event_name", begin_date = "YYYY/MM/DDTHH:MM:SS", end_date = "YYYY/MM/DDTHH:MM:SS"}
+:param people => [{id: "code_1", begin_time = "YYYY/MM/DDTHH:MM:SS", end_time = "YYYY/MM/DDTHH:MM:SS"}, {id: "code_2", begin_time = "YYYY/MM/DDTHH:MM:SS", end_time = "YYYY/MM/DDTHH:MM:SS"}, ...]
+
+CREATE (e: Event{nome: $event.name, begn_date: datetime($event.begin_date, end_date: datetime($event.end_date})
+WITH e as event 
+UNWIND $people AS ps 
+MATCH (p: Person) 
+WHERE p.id = ps.id 
+CREATE (p) -[r: PARTECIPATES{begn_time: datetime($ps.begin_time, end_time: datetime($ps.end_time)}]-> (event)
+

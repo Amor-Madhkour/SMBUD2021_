@@ -1,0 +1,54 @@
+Queries for number of:
+ - people who completed the vaccination cycle (secod dose or first dose+covid)
+ - people who got the first dose (either including or excluding people who got covid)
+ - people who got an extra dose
+can be executed for:
+ - the total form the beggining to the end of each day/week/month
+ - the number of people who did it each month
+and for:
+ - each region
+ - each group of region
+ - complessively in the nation
+and eventually divided or not by age
+
+which leads to many (3*2*3*2=36) similar queries.
+In the report would keep:
+- completed vaccination (that requires a bit of computation) + total + each region + divided by age
+- first dose + each month + group of region + divided by age
+- third dose + total + complessively
+just to make it short.
+Eventually more of them can be used in Kibana for a better dashboard.
+
+So we are at 3 queies, but if necessary we can extrac new (boring) ones.
+Ok, maybe let's do 5 of these queries.
+
+Theroically we could do them for particular ranges, but remember that we cannot do 12-x, but just 10-x multiple of 10
+
+We can do some rating (for instance on the number of vaccinations weighting the age), for weighting we can see
+https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-rank-feature-query.html
+This requires a new field of rank_feature type to be added, that could be a "weighted" average of the age-interval added at runtime
+(weighted because maybe the average is a bed scoring system)
+This may lead to a new command that updates it on all documents... but is it a right idea? I mean, it would be slow...
+But even recomputing it every time the query is done is slow, so keeping the field may be ok (de-normalization is ok now!).
+And I don't knwo how to do it without the field.
+
+To compute the score on the fly based on attributes, see:
+https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
+https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html#score-functions
+
+Oh, in the second link I see a "params.a"... so maybe there are parametrized queries in ES too.
+
+Ok, now we can extract the ranking of many things: we have the categories of before, but instead of dividing or not by age, we do the ranking.
+Ok, I we can reach 8 querie,s even if maybe some of them are "boring" (i.e., pieces similiar to other ones)
+
+Now we can also add something abou the vaccine type.
+ - number of vaccines of each type used each month
+ - number of vaccines of each type used from the beginning to the ned of each month
+I don't think that it's relevant to have this divided by age or by region.
+
+
+Other queries:
+ - percentage of vaccinations of male/female (I would use the total from the beginning, eventually divided by region or group of regions)
+ - percentage of vaccinated (complete cycle) that have also done the booster dose 
+   (eventually consider only vaccinated before n months, where n is the minimun number of months from the second dose to when you can take the third)
+ - percentage of vaccinated for age range in each region

@@ -1,0 +1,21 @@
+MATCH(n)
+DETACH DELETE (n);
+
+LOAD CSV WITH HEADERS FROM 'file:///test_people.csv' AS row
+MERGE (p:Person{name:row.name})
+RETURN count(p);
+
+LOAD CSV WITH HEADERS FROM 'file:///test_contacts.csv' AS row
+MATCH (p1:Person{name:row.person1})
+MATCH (p2:Person{name:row.person2})
+MERGE (p1)<-[:CONTACT{time:toInteger(row.time)}]->(p2) //I can't find a better name
+RETURN count(p1);
+
+LOAD CSV WITH HEADERS FROM 'file:///test_events.csv' AS row
+MERGE (e:Event{event_id:toInteger(row.event_id),time:toInteger(row.time)})
+RETURN count(e);
+
+LOAD CSV WITH HEADERS FROM 'file:///test_event_part.csv' AS row
+MATCH (p:Person{name:row.person})
+MATCH (e:Event{event_id:toInteger(row.event_id)})
+MERGE (p)-[:PARTECIPATE]->(e);

@@ -1,0 +1,163 @@
+Create an index valled vaccinations uploading the data from somministrazioni.csv using the following mapping and ingest pipeline:
+Mapping:
+{
+  "properties": {
+    "@timestamp": {
+      "type": "date"
+    },
+    "NUTS1_code": {
+      "type": "keyword"
+    },
+    "NUTS2_code": {
+      "type": "keyword"
+    },
+    "administration_date": {
+      "type": "date",
+      "format": "iso8601"
+    },
+    "age_group": {
+      "type": "keyword"
+    },
+    "area": {
+      "type": "keyword"
+    },
+    "booster_doses": {
+      "type": "long"
+    },
+    "female_count": {
+      "type": "long"
+    },
+    "first_doses": {
+      "type": "long"
+    },
+    "male_count": {
+      "type": "long"
+    },
+    "post_infection_doses": {
+      "type": "long"
+    },
+    "region_ISTAT_code": {
+      "type": "keyword"
+    },
+    "region_name": {
+      "type": "keyword"
+    },
+    "second_doses": {
+      "type": "long"
+    },
+    "supplier": {
+      "type": "keyword"
+    },
+	"administered_doses": {
+      "type": "long"
+    },
+	"fully_vaccinated_count": {
+      "type": "long"
+    }
+  }
+}
+Ingest pipeline:
+{
+  "description": "Ingest pipeline created by text structure finder",
+  "processors": [
+    {
+      "csv": {
+        "field": "message",
+        "target_fields": [
+          "administration_date",
+          "supplier",
+          "area",
+          "age_group",
+          "male_count",
+          "female_count",
+          "first_doses",
+          "second_doses",
+          "post_infection_doses",
+          "booster_doses",
+          "NUTS1_code",
+          "NUTS2_code",
+          "region_ISTAT_code",
+          "region_name"
+        ],
+        "ignore_missing": false
+      }
+    },
+    {
+      "date": {
+        "field": "administration_date",
+        "timezone": "Europe/Rome",
+        "formats": [
+          "ISO8601"
+        ]
+      }
+    },
+    {
+      "convert": {
+        "field": "booster_doses",
+        "type": "long",
+        "ignore_missing": true
+      }
+    },
+    {
+      "convert": {
+        "field": "female_count",
+        "type": "long",
+        "ignore_missing": true
+      }
+    },
+    {
+      "convert": {
+        "field": "first_doses",
+        "type": "long",
+        "ignore_missing": true
+      }
+    },
+    {
+      "convert": {
+        "field": "male_count",
+        "type": "long",
+        "ignore_missing": true
+      }
+    },
+    {
+      "convert": {
+        "field": "post_infection_doses",
+        "type": "long",
+        "ignore_missing": true
+      }
+    },
+    {
+      "convert": {
+        "field": "second_doses",
+        "type": "long",
+        "ignore_missing": true
+      }
+    },
+    {
+      "script": {
+        "description": "pad the istat code to two digit, for a problem with java overloading I need that def array",
+        "lang": "painless",
+        "source": "ctx['region_ISTAT_code'] = String.format('%02d', new def[] {Integer.parseInt(ctx['region_ISTAT_code']) });"
+      }
+    },
+	  {
+      "script": {
+        "description": "administered_doses field",
+        "lang": "painless",
+        "source": "ctx['administered_doses'] = ctx['male_count']+ctx['female_count'];"
+      }
+    },
+	  {
+      "script": {
+        "description": "add fully_vaccinated_count field",
+        "lang": "painless",
+        "source": "ctx['fully_vaccinated_count'] = ctx['post_infection_doses']+ctx['second_doses'];"
+      }
+    },
+    {
+      "remove": {
+        "field": "message"
+      }
+    }
+  ]
+}

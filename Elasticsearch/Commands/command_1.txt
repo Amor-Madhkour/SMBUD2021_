@@ -1,0 +1,79 @@
+
+
+
+# pipeline to automaticcaly generate redundant fields and pad the istat code
+PUT _ingest/pipeline/automatic_sum_fields_and_format_istat_code
+{
+  "description": "Ingest pipeline to automatically add the administered_doses and fully_vaccinated_count fields and pad the istat code. It also add the timestamp field",
+  "processors": [
+    {
+      "script": {
+        "description": "set administered_doses field",
+        "lang": "painless",
+        "source": "ctx['administered_doses'] = ctx['male_count']+ctx['female_count'];"
+      }
+    },
+	  {
+      "script": {
+        "description": "set fully_vaccinated_count field",
+        "lang": "painless",
+        "source": "ctx['fully_vaccinated_count'] = ctx['post_infection_doses']+ctx['second_doses'];"
+      }
+    },
+	  {
+      "script": {
+        "description": "pad the istat code to two digit",
+        "lang": "painless",
+        "source": "ctx['region_ISTAT_code'] = String.format('%02d', new def[] {Integer.parseInt(ctx['region_ISTAT_code']) });"
+      }
+    },
+    {
+      "date": {
+        "field": "administration_date",
+        "timezone": "Europe/Rome",
+        "formats": [
+          "ISO8601"
+        ]
+      }
+    }
+  ]
+}
+
+# command: insert a new document given all the parameters that are used in the csv file
+POST /vaccinations/_doc?pipeline=automatic_sum_fields_and_format_istat_code
+{
+  "administration_date": "2022-01-08",
+  "supplier": "Pfizer/BioNTech",
+  "area": "LOM",
+  "age_group": "20-29",
+  "male_count": 10,
+  "female_count": 20,
+  "first_doses": 10,
+  "second_doses": 10,
+  "post_infection_doses": 5,
+  "booster_doses": 5,
+  "NUTS1_code": "ITC",
+  "NUTS2_code": "ITC4",
+  "region_ISTAT_code": "3",
+  "region_name": "Lombardia"
+}
+
+# query to test the result
+GET /vaccinations/_search
+{
+  "query": {
+    "bool": {
+      "filter": [
+        {"range": {
+          "administered_date": {
+            "gte": "2022-01-08",
+            "lte": "2022-01-08"
+          }
+        }}
+      ]
+    }
+  }
+}
+
+
+

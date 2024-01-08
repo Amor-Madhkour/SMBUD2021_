@@ -1,0 +1,131 @@
+
+//how to set parameters in neo4j
+:param name => "aaa"
+
+:param start_time => 0
+
+//first level contacts
+MATCH (i:Person{name:$name})-[c:CONTACT]-(a:Person)
+WHERE c.time>=$start_time
+RETURN a AS person, c.time AS time
+UNION 
+MATCH (i:Person{name:$name})-[:PARTECIPATE]-(e:Event)-[:PARTECIPATE]-(b:Person) //automatically i<>b
+WHERE e.time>=$start_time
+RETURN b AS person, e.time AS time
+
+//or you may use:
+MATCH (i:Person{name:$name})
+CALL {
+	WITH i MATCH (i)-[r:CONTACT]-(c:Person) WHERE r.time>=$start_time
+	RETURN c, r.time AS time
+	UNION
+	WITH i MATCH (i)-[:PARTECIPATE]-(e:Event)-[:PARTECIPATE]-(c:Person) WHERE e.time>=$start_time
+	RETURN c, e.time AS time //e.start_time with the full DB
+}
+RETURN DISTINCT c
+
+//considering also the possibility of a test already taken after the contact:
+MATCH (i:Person{name:$name})
+CALL {
+	WITH i MATCH (i)-[r:CONTACT]-(c:Person) WHERE r.time>=$start_time
+	RETURN c, r.time AS time
+	UNION
+	WITH i MATCH (i)-[:PARTECIPATE]-(e:Event)-[:PARTECIPATE]-(c:Person) WHERE e.time>=$start_time
+	RETURN c, e.time AS time //e.start_time with the full DB
+	//eventually union the other type of relationship
+}
+WITH c, max(time) AS contact_time
+OPTIONAL MATCH (c)-[:TAKE]-(t:TEST)
+WHERE t.result = negative //true/false
+WITH c, contact_time, max(t.time) AS test_time
+WHERE test_time IS NULL OR test_time < time //no test after contact
+
+
+//second level contacts----------------------------------------------------------------------
+
+//maybe using apoc.custom.asFunction may be useful to save and re use query
+//second level without considering tests, should work properly
+MATCH (i:Person{name:$name})
+CALL {
+	WITH i MATCH (i)-[r:CONTACT]-(c:Person) WHERE r.time>=$start_time
+	RETURN c, r.time AS time
+	UNION
+	WITH i MATCH (i)-[:PARTECIPATE]-(e:Event)-[:PARTECIPATE]-(c:Person) WHERE e.time>=$start_time
+	RETURN c, e.time AS time //e.start_time with the full DB
+	//eventually union the other type of relationship
+}
+WITH c AS first, max(time) AS first_contact_time
+CALL {
+	WITH first,first_contact_time MATCH (first)-[r:CONTACT]-(c:Person) WHERE r.time>=first_contact_time
+	RETURN c, r.time AS time
+	UNION
+	WITH first,first_contact_time MATCH (first)-[:PARTECIPATE]-(e:Event)-[:PARTECIPATE]-(c:Person) WHERE e.time>=first_contact_time
+	RETURN c, e.time AS time //e.start_time with the full DB
+	//eventually union the other type of relationship
+}
+WITH c //now remove the infected and the first level contacts (if you want all the first elvel cotnact ,remove the infected and add them, because now you have only the first level contacts that were in contact with another first level contact)
+WHERE c.name<>$name //not the infected... may be moved in the subquery
+CALL { //find the first level contact again to remove them
+	MATCH (i:Person{name:$name})-[r:CONTACT]-(first:Person) WHERE r.time>=$start_time
+	RETURN first
+	UNION
+	MATCH (i:Person{name:$name})-[:PARTECIPATE]-(e:Event)-[:PARTECIPATE]-(first:Person) WHERE e.time>=$start_time
+	RETURN first
+	//eventually union the other type of relationship
+}
+WITH c,collect(first) as first
+WHERE NOT c IN first
+RETURN c
+
+//statistcs----------------------------
+
+//first ten cities for #infected
+//notice that I don't make history of addresses of people
+//without it, I can do the statistic only now.
+//I I remember the old adresses, I can do statistics on the past
+
+MATCH (city)<-[:SITUATED_IN]-(:Address)<-[:LIVES]-(i:Person)-[:TOOK]-(t_p:Test{result:true})
+OPTIONAL MATCH (i)-[:TOOK]-(t_n:Test{result:false})
+WITH city, i, max(t_p.time) AS positive_time, max(t_n.time) AS negative_time
+WHERE negative_time IS NULL OR positive_time>negative_time
+WITH city, count(i) AS infected_count
+ORDER BY infected_count
+LIMIT 10 								//just a limit
+RETURN city, infected_count
+
+
+//events that have beome outbreaks (is it the right word?)
+//since we don't know where a person was infected,
+//we consider that an event is probabily in this category if at least 50% (adjust the value)
+//of partecipants where found infected in the following 2 weeks
+//possibly we could limit to events in a certian time interval
+
+MATCH (e:Event)-[]-(p:Person)
+WHERE //interval for e.start_time if you want to
+WITH e, count(p) AS partecipants
+MATCH (e)-[]-(i:Person)-[]-(t:test{result:True}) //true means positive
+WHERE t.time>=e.start_time AND t.time<=e.end_time+2 weeks //TODO: find the syntax to do math with dates
+WITH e,partecipants,count(i) AS infected
+//count i, not p: if a person has taken multiple tests after the event (e.g. he finds that he's infected, after a week tries again to see if he has recovered), it shall be counted once
+WHERE infected/partecipants >0.5
+ORDER BY infected/partecipants //you may order using anything you want
+LIMIT 10 //just a limit if you want
+RETURN e
+
+
+=============================
+green pass vs no green pass
+=============================
+//return the number of people vaccinated who got infected
+
+match (d1:Vaccine)<-[:takes]-(p:Person)-[:takes]->(d2:Vaccine) 
+where d2.date-d1.date<30 
+with p, d2 match (p)-[:does]-(t:Test{result:"positive"}) 
+where t.date-d2.date<60 							// should update the value
+return count(t) as VaccidatedPositiveCases
+
+//should we distinguish between vaccines with two doses like pfizer and j&j which requires only one dose ? to me it makes sense and should be easy to implement, just a union
+// we may also compute the percentge on the total cases or return also the number of non vaccinated
+
+
+

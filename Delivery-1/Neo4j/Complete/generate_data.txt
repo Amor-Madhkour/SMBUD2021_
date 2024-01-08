@@ -1,0 +1,107 @@
+MATCH (n)
+DETACH DELETE n;
+
+//each city is unique in the csv
+LOAD CSV WITH HEADERS FROM 'file:///cities.csv' AS row
+CREATE (c:City{name:row.name})
+RETURN count(c);
+
+//creating all the places and cities and then maching them is simpler and possibly more efficient (don't need to check for each address if it was already created or not)
+LOAD CSV WITH HEADERS FROM 'file:///addresses.csv' AS row
+MATCH (c:City{name:row.city})
+MERGE (a:Place{address:row.addr})-[:SITUATED_IN]->(c) //if c exists and row.addr exist in another city, it creates a new address for c, which is right.
+RETURN count(a);
+
+//each person is unique in the csv
+LOAD CSV WITH HEADERS FROM 'file:///people.csv' AS row
+CREATE (p:Person{
+	code:row.code,
+	name:row.name,
+	birth_date:datetime({epochmillis:apoc.date.parse(row.birth_date, "ms", "yyyy-MM-dd")})
+	})
+RETURN count(p);
+
+LOAD CSV WITH HEADERS FROM 'file:///person_addresses.csv' AS row
+MATCH (p:Person{code:row.person})
+MATCH (a:Place{address:row.address})-[:SITUATED_IN]->(c:City{name:row.city})
+CREATE (p)-[r:LIVES{start_date:datetime({epochmillis:apoc.date.parse(row.start_date, "ms", "yyyy-MM-dd")})}]->(a)
+WITH r,
+	( CASE row.end_date WHEN "null" THEN null ELSE datetime({epochmillis:apoc.date.parse(row.end_date, "ms", "yyyy-MM-dd")}) END ) AS end_date
+SET r.end_date = end_date
+RETURN count(r);
+
+
+LOAD CSV WITH HEADERS FROM 'file:///devices.csv' AS row
+MATCH (p:Person{code:row.person})
+CREATE (p)-[:OWNS]->(d:Device{device_id:row.device_id,category:row.device_category})
+RETURN count(d);
+
+
+LOAD CSV WITH HEADERS FROM 'file:///tests.csv' AS row
+MATCH (p:Person{code:row.person})
+MATCH (a:Place{address:row.address})-[:SITUATED_IN]->(c:City{name:row.city})
+MERGE (p)-[:DOES]->
+		(t:Test{date:datetime({epochmillis:apoc.date.parse(row.date, "ms", "yyyy-MM-dd")}),
+		positive:(CASE row.positive WHEN "True" THEN true ELSE false END )})
+		-[:PERFORMED_IN]->(a)
+RETURN count(t);
+
+
+LOAD CSV WITH HEADERS FROM 'file:///vaccinations.csv' AS row
+MATCH (p:Person{code:row.person})
+MATCH (a:Place{address:row.address})-[:SITUATED_IN]->(c:City{name:row.city})
+MERGE (p)-[:TAKES]->
+		(v:Vaccination{date:datetime({epochmillis:apoc.date.parse(row.date, "ms", "yyyy-MM-dd")}),vaccine:row.vaccine})
+		-[:PERFORMED_IN]->(a)
+RETURN count(v);
+
+//there is a small probability that the same couple has a contact twice at the same time
+//due to how I create the csv file
+//so I use MERGE
+LOAD CSV WITH HEADERS FROM 'file:///contacts.csv' AS row
+WITH row.person1 AS code1, row.person2 AS code2, datetime({epochmillis:apoc.date.parse(row.time, "ms", "yyyy-MM-dd HH:mm:ss")}) AS time
+MATCH (p1:Person{code:code1}),
+		(p2:Person{code:code2})
+MERGE (p1)-[c:MEETS{time:time}]-(p2)
+RETURN count(c);
+
+//aggregations: remmeber that both the address and the end_time are optional and may be "null"
+LOAD CSV WITH HEADERS FROM 'file:///aggregations.csv' AS row
+WITH row.name as name, row.address AS address, row.city AS city,
+	datetime({epochmillis:apoc.date.parse(row.start_time, "ms", "yyyy-MM-dd HH:mm:ss")}) AS start_time,
+	( CASE row.end_time WHEN "null" THEN null ELSE datetime({epochmillis:apoc.date.parse(row.end_time, "ms", "yyyy-MM-dd HH:mm:ss")}) END ) AS end_time
+CREATE (aggr:Aggregation{name:name,start_time:start_time}) 
+SET aggr.end_time = end_time //accepts null (doesn't create the property)
+RETURN count(aggr);
+
+//To avoid the usage of the eager operator I use another command to add the addresses
+//Notice that when loading our example the eager operator is not such a big problem (we have generated the whole data in memory and then wrote it to file)
+LOAD CSV WITH HEADERS FROM 'file:///aggregations.csv' AS row
+WITH row.name as name, row.address AS address, row.city AS city,
+	datetime({epochmillis:apoc.date.parse(row.start_time, "ms", "yyyy-MM-dd HH:mm:ss")}) AS start_time
+WHERE address<>"null"
+MATCH (aggr:Aggregation{name:name,start_time:start_time}) 
+MATCH (addr:Place{address:address})-[:SITUATED_IN]->(c:City{name:city})
+CREATE (aggr)-[:SITUATED_IN]->(addr)
+RETURN count(aggr);
+
+
+LOAD CSV WITH HEADERS FROM 'file:///participations.csv' AS row
+MATCH (aggr:Aggregation{name:row.aggregation_name,start_time:datetime({epochmillis:apoc.date.parse(row.aggregation_start, "ms", "yyyy-MM-dd HH:mm:ss")})})
+MATCH (p:Person{code:row.person})
+WITH datetime({epochmillis:apoc.date.parse(row.start_time, "ms", "yyyy-MM-dd HH:mm:ss")}) AS start_time,
+	 datetime({epochmillis:apoc.date.parse(row.end_time, "ms", "yyyy-MM-dd HH:mm:ss")}) AS end_time,
+	 aggr,p
+MERGE (p)-[r:PARTICIPATES{start_time:start_time,end_time:end_time}]->(aggr)
+RETURN count(r);
+
+//again, end_date may be "null"
+LOAD CSV WITH HEADERS FROM 'file:///frequent_contacts.csv' AS row
+MATCH (p1:Person{code:row.person1})
+MATCH (p2:Person{code:row.person2})
+CREATE (p1)-[c:FREQUENTS{start_date:datetime({epochmillis:apoc.date.parse(row.start_date, "ms", "yyyy-MM-dd")})}]->(p2) //randomly chosen direction: it's irrilevant
+SET c.end_date = ( CASE row.end_date WHEN "null" THEN null ELSE datetime({epochmillis:apoc.date.parse(row.end_date, "ms", "yyyy-MM-dd")}) END )
+RETURN count(c);
+
+
+

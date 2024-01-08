@@ -1,0 +1,49 @@
+These guidelines show how to add and populate the regions index in order to use the second and third commands.
+See the report for the creation of the enrich index and the pipeline required by the commands.
+
+Create the regions index with the following mapping and ingest pipeline:
+Mapping:
+{
+  "properties": {
+    "NUTS1_code": {
+      "type": "keyword"
+    },
+    "NUTS2_code": {
+      "type": "keyword"
+    },
+    "area": {
+      "type": "keyword"
+    },
+    "region_ISTAT_code": {
+      "type": "keyword"
+    },
+    "region_name": {
+      "type": "keyword"
+    }
+  }
+}
+
+Ingest pipeline:
+{
+  "description": "Ingest pipeline created by text structure finder",
+  "processors": [
+    {
+      "csv": {
+        "field": "message",
+        "target_fields": [
+          "area",
+          "NUTS1_code",
+          "NUTS2_code",
+          "region_ISTAT_code",
+          "region_name"
+        ],
+        "ignore_missing": false
+      }
+    },
+    {
+      "remove": {
+        "field": "message"
+      }
+    }
+  ]
+}

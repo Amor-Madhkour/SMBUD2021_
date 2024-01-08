@@ -1,0 +1,48 @@
+person,date,vaccine,address,city
+XXXXXXXXXXXXXX13,2020-12-18,Moderna,Forest Drive 7,Monza
+XXXXXXXXXXXXXX13,2021-01-01,Moderna,Forest Drive 7,Monza
+XXXXXXXXXXXXXX19,2021-05-05,Pfizer,Willow Drive 17,Sassari
+XXXXXXXXXXXXXX19,2021-05-20,Pfizer,Willow Drive 17,Sassari
+XXXXXXXXXXXXXX20,2020-11-06,AstraZeneca,1st Avenue 29,Pescara
+XXXXXXXXXXXXXX20,2020-11-20,AstraZeneca,1st Avenue 29,Pescara
+XXXXXXXXXXXXXX14,2021-02-06,Pfizer,8th Avenue 14,Taranto
+XXXXXXXXXXXXXX14,2021-02-20,Pfizer,8th Avenue 14,Taranto
+XXXXXXXXXXXXXX17,2021-06-22,Moderna,Cypress Court 7,Genova
+XXXXXXXXXXXXXX16,2020-12-09,Moderna,14th Street 30,Roma
+XXXXXXXXXXXXXX16,2020-12-24,Moderna,14th Street 30,Roma
+XXXXXXXXXXXXXXX8,2021-02-01,Moderna,Tanglewood Drive 14,Cagliari
+XXXXXXXXXXXXXXX8,2021-02-16,Moderna,Tanglewood Drive 14,Cagliari
+XXXXXXXXXXXXXX25,2021-05-19,Pfizer,Jackson Avenue 28,Padova
+XXXXXXXXXXXXXX25,2021-06-03,Pfizer,Jackson Avenue 28,Padova
+XXXXXXXXXXXXXXX5,2021-02-26,AstraZeneca,Maple Street 20,Foggia
+XXXXXXXXXXXXXXX5,2021-03-12,AstraZeneca,Maple Street 20,Foggia
+XXXXXXXXXXXXXX10,2021-01-06,Pfizer,Fawn Lane 17,Torino
+XXXXXXXXXXXXXX10,2021-01-21,Pfizer,Fawn Lane 17,Torino
+XXXXXXXXXXXXXXX0,2020-11-30,AstraZeneca,Willow Drive 24,Messina
+XXXXXXXXXXXXXXX0,2020-12-15,AstraZeneca,Willow Drive 24,Messina
+XXXXXXXXXXXXXX23,2021-05-26,Pfizer,Harrison Avenue 11,Bari
+XXXXXXXXXXXXXX23,2021-06-10,Pfizer,Harrison Avenue 11,Bari
+XXXXXXXXXXXXXXX4,2020-11-23,Moderna,Grove Street 7,Vicenza
+XXXXXXXXXXXXXXX4,2020-12-08,Moderna,Grove Street 7,Vicenza
+XXXXXXXXXXXXXXX9,2020-11-10,AstraZeneca,Riverside Drive 20,Roma
+XXXXXXXXXXXXXXX9,2020-11-25,AstraZeneca,Riverside Drive 20,Roma
+XXXXXXXXXXXXXX12,2020-11-01,AstraZeneca,Fawn Lane 7,Salerno
+XXXXXXXXXXXXXX12,2020-11-15,AstraZeneca,Fawn Lane 7,Salerno
+XXXXXXXXXXXXXXX1,2021-03-01,AstraZeneca,Rose Street 25,Bergamo
+XXXXXXXXXXXXXXX1,2021-03-16,AstraZeneca,Rose Street 25,Bergamo
+XXXXXXXXXXXXXXX3,2020-11-13,AstraZeneca,Heather Lane 26,Venezia
+XXXXXXXXXXXXXXX3,2020-11-28,AstraZeneca,Heather Lane 26,Venezia
+XXXXXXXXXXXXXXX2,2021-06-04,AstraZeneca,Hudson Street 23,Livorno
+XXXXXXXXXXXXXXX2,2021-06-19,AstraZeneca,Hudson Street 23,Livorno
+XXXXXXXXXXXXXX18,2020-11-22,AstraZeneca,9th Street West 14,Bari
+XXXXXXXXXXXXXX18,2020-12-06,AstraZeneca,9th Street West 14,Bari
+XXXXXXXXXXXXXX11,2021-05-21,AstraZeneca,High Street 28,Ancona
+XXXXXXXXXXXXXX11,2021-06-05,AstraZeneca,High Street 28,Ancona
+XXXXXXXXXXXXXX22,2020-11-18,AstraZeneca,Cherry Lane 23,Bari
+XXXXXXXXXXXXXX22,2020-12-02,AstraZeneca,Cherry Lane 23,Bari
+XXXXXXXXXXXXXX27,2021-03-16,Pfizer,Church Street South 1,Palermo
+XXXXXXXXXXXXXX27,2021-03-30,Pfizer,Church Street South 1,Palermo
+XXXXXXXXXXXXXX28,2021-05-14,Moderna,Harrison Avenue 29,Cesena
+XXXXXXXXXXXXXX28,2021-05-28,Moderna,Harrison Avenue 29,Cesena
+XXXXXXXXXXXXXX15,2021-04-18,Pfizer,Summit Avenue 6,Foggia
+XXXXXXXXXXXXXX15,2021-05-02,Pfizer,Summit Avenue 6,Foggia

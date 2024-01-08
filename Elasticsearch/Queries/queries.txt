@@ -1,0 +1,278 @@
+# by default it reutrns all the hits plus the aggregation, size 0 removes the hits
+#from now on, I use size:100 in aggregatiopns of regions or age_group.
+#even if in fact there are less regions and age groups in our dataset,
+#this allows you to easily change dataset, using data from other nations or with different age groups
+#up untile the limit of 100 regions and 100 age groups is respected
+# notice the usage of sub-aggregations that goes on the same level of term
+# also notice the second size: by default it returns at most 10 buckets
+
+#number of people that completed the vaccination cycle each month,
+#both cumulative and for each month.
+#note: used in the dashboard with day as granularity
+GET /vaccinations/_search
+{
+  "size": 0, 
+  "aggs": {
+    "months": {
+      "date_histogram": {
+        "field": "administration_date",
+        "calendar_interval": "month"
+      }, 
+      "aggs": {
+        "fully_vaccinated_this_month": {
+          "sum": {"field": "fully_vaccinated_count"}
+        },
+        "cumulative_fully_vaccinated":{
+          "cumulative_sum": {"buckets_path": "fully_vaccinated_this_month"}
+        }
+      }
+    }
+  }
+}
+
+#number of people who can take the booster dose and of administered booster doses:
+#note: used in the dashboard (both as metrics and as more complex query with time shift over time)
+GET /vaccinations/_search
+{
+  "size": 0,
+  "aggs": {
+    "records_before_4_months": {
+      "filter": {
+        "range":{
+          "administration_date":{
+            "lte": "now-4M/d"
+          }
+        }
+      },
+      "aggs": {
+        "people_who_can_take_the_booster_dose": {
+          "sum": {
+            "field": "fully_vaccinated_count"
+          }
+        }
+      }
+    },
+    "administered_booster_doses":{
+      "sum": {
+        "field": "booster_doses"
+      }
+    }
+  }
+}
+
+#first doses (including post_infection doses) for each month
+#they are the first doses to be administered, 
+#so this shows how many people have started taking the vaccine each month 
+#note: more or less used in the dashboard, but there it is different (doesn't sum the two doses)
+GET /vaccinations/_search
+{
+  "size": 0, 
+  "aggs": {
+    "new_vaccinated_for_month": {
+      "date_histogram": {
+        "field": "administration_date",
+        "calendar_interval": "month"
+      },
+      "aggs": {
+        "people_who_joined_the_campaign": {
+          "sum": {"script": "doc['first_doses'].value+doc['post_infection_doses'].value"}
+        }
+      }
+    }
+  }
+}
+
+#male and female vaccinations for each month
+#note: used in the dashboard, but similar to the previous one
+GET /vaccinations/_search
+{
+  "size": 0, 
+  "aggs": {
+    "vaccinations_for_month": {
+      "date_histogram": {
+        "field": "administration_date",
+        "calendar_interval": "month"
+      },
+      "aggs": {
+        "male": {
+          "sum": {"field": "male_count"}
+        },
+        "female": {
+          "sum": {"field": "female_count"}
+        }
+      }
+    }
+  }
+}
+
+
+#administered doses for each region for each age group
+#note: used in the dashboard
+GET /vaccinations/_search
+{
+  "size": 0, 
+  "aggs": {
+    "region": {
+      "terms": {
+        "field": "area",
+        "size":100,
+        "order": {"_key": "asc"}
+      },
+      "aggs": {
+        "age_group":{
+          "terms": {
+            "field": "age_group",
+            "size":100,
+            "order": {"_key": "asc"}
+          },
+          "aggs": {
+            "administered_doses": {
+              "sum": {"field": "administered_doses"}
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#administered doses for each supplier
+#note: used in the dashboard, but easy
+GET /vaccinations/_search
+{
+  "size": 0, 
+  "aggs": {
+    "administered_doses_per_supplier": {
+      "terms": {
+        "field": "supplier",
+        "size":100,
+        "order": {"_key": "asc"}
+      },
+      "aggs": {
+        "administered_doses": {
+          "sum": {"field": "administered_doses"}
+        }
+      }
+    }
+  }
+}
+
+
+
+# average vaccinations/day for a region (in this case VDA since it has small numbers)
+# considering the last n days (one would use something like a week, but we do not update our data regulary)
+# note: if there are no documents from day x to now, it doesn't consider the days from x to now in the average
+# (they do not appear in the buckets)
+GET /vaccinations/_search
+{
+  "size": 0, 
+  "query":{
+    "bool": {
+      "filter": [
+        {"term": {
+          "area": "VDA"
+        }},
+        {"range":{
+          "administration_date":{
+            "gte": "now-7d/d"
+          }
+        }}
+      ]
+    }
+  },
+  "aggs": {
+    "day": {
+      "date_histogram": {"field": "administration_date", "calendar_interval":"day"},
+      "aggs": {
+        "vaccinations": {
+          "sum": {"field": "administered_doses"}
+        }
+      }
+    },
+    "vaccinations_over_day": {
+      "avg_bucket": {
+        "buckets_path": "day>vaccinations",
+        "gap_policy" : "insert_zeros"
+      }
+    }
+  }
+}
+
+
+#region with the maximun number of administered booster doses in a given group (NUTS code 1)
+# in the last n days
+GET /vaccinations/_search
+{
+  "size": 0, 
+  "query":{
+    "bool": {
+      "filter": [
+        {"term": {
+          "NUTS1_code": "ITF"
+        }},
+        {"range":{
+          "administration_date":{
+            "gte": "now-7d/d"
+          }
+        }}
+      ]
+    }
+  },
+  "aggs": {
+    "region": {
+      "terms": {"field": "area","size": 100},
+      "aggs": {
+        "boosters": {
+          "sum": {"field": "booster_doses"}
+        }
+      }
+    },
+    "best_region_for_boosters": {
+      "max_bucket": {
+        "buckets_path": "region>boosters",
+        "gap_policy" : "insert_zeros"
+      }
+    }
+  }
+}
+
+
+#average number of doses used per month for a supplier in a region
+#I used Jessen since it has few doses used
+GET /vaccinations/_search
+{
+  "size":0,
+  "query":{
+    "bool": {
+      "filter": [
+        {"term": {
+          "area": "LOM"
+        }},
+        {"term":{
+          "supplier":{
+            "value":"Janssen"
+          }
+        }}
+      ]
+    }
+  },
+  "aggs":{
+    "months":{
+      "date_histogram": {"field": "administration_date","calendar_interval": "month"},
+      "aggs":{
+        "monthly_doses":{
+          "sum":{
+            "field":"administered_doses"
+          }
+        }
+      }
+    },
+    "avg_doses_per_month":{
+      "avg_bucket": {
+        "buckets_path" : "months>monthly_doses",
+        "gap_policy" : "insert_zeros",
+        "format" : "0"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+name,start_time,end_time,address,city
+Concert 0,2021-06-28 09:00:00,2021-06-28 11:00:00,Fulton Street 12,Sassari
+Concert 1,2021-05-28 14:00:00,2021-05-28 17:00:00,Lawrence Street 26,Piacenza
+Concert 2,2021-06-25 13:00:00,2021-06-25 16:00:00,Race Street 5,Perugia
+Flight Number 3,2021-05-21 22:00:00,2021-05-22 02:00:00,null,null
+Flight Number 4,2021-06-06 19:00:00,2021-06-06 19:00:00,null,null
+Museum visit 5,2010-09-23 00:00:00,null,Jackson Avenue 25,Bari
+Museum visit 6,2010-01-24 00:00:00,null,Franklin Avenue 12,Foggia
+Museum visit 7,2017-07-11 00:00:00,null,Hawthorne Lane 22,Piacenza

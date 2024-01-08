@@ -1,0 +1,21 @@
+area,NUTS1_code,NUTS2_code,region_ISTAT_code,region_name
+ABR,ITF,ITF1,13,Abruzzo
+BAS,ITF,ITF5,17,Basilicata
+CAL,ITF,ITF6,18,Calabria
+CAM,ITF,ITF3,15,Campania
+EMR,ITH,ITH5,08,Emilia-Romagna
+FVG,ITH,ITH4,06,Friuli-Venezia Giulia
+LAZ,ITI,ITI4,12,Lazio
+LIG,ITC,ITC3,07,Liguria
+LOM,ITC,ITC4,03,Lombardia
+MAR,ITI,ITI3,11,Marche
+MOL,ITF,ITF2,14,Molise
+PAB,ITH,ITH1,04,Provincia Autonoma Bolzano / Bozen
+PAT,ITH,ITH2,04,Provincia Autonoma Trento
+PIE,ITC,ITC1,01,Piemonte
+PUG,ITF,ITF4,16,Puglia
+SAR,ITG,ITG2,20,Sardegna
+SIC,ITG,ITG1,19,Sicilia
+TOS,ITI,ITI1,09,Toscana
+UMB,ITI,ITI2,10,Umbria
+VDA,ITC,ITC2,02,Valle d'Aosta / Vallée d'Aoste

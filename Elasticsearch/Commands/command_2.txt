@@ -1,0 +1,145 @@
+#first create an index regions and upload the region file from the data folder (mapping and ingest pipeline are not the default ones)
+#mapping:
+{
+  "properties": {
+    "NUTS1_code": {
+      "type": "keyword"
+    },
+    "NUTS2_code": {
+      "type": "keyword"
+    },
+    "area": {
+      "type": "keyword"
+    },
+    "region_ISTAT_code": {
+      "type": "keyword"
+    },
+    "region_name": {
+      "type": "keyword"
+    }
+  }
+}
+#ingest pipeline:
+{
+  "description": "Ingest pipeline created by text structure finder",
+  "processors": [
+    {
+      "csv": {
+        "field": "message",
+        "target_fields": [
+          "area",
+          "NUTS1_code",
+          "NUTS2_code",
+          "region_ISTAT_code",
+          "region_name"
+        ],
+        "ignore_missing": false
+      }
+    },
+    {
+      "remove": {
+        "field": "message"
+      }
+    }
+  ]
+}
+
+#now add the enrich policy region_area_policy
+PUT /_enrich/policy/region_area_policy
+{
+  "match": {
+    "indices": "regions",
+    "match_field": "area",
+    "enrich_fields": ["NUTS1_code", "NUTS2_code","region_ISTAT_code", "region_name"]
+  }
+}
+
+#now execute the policy to create the enrich index:
+PUT /_enrich/policy/region_area_policy/_execute
+
+#now create the ingest policy to enrich the data
+PUT _ingest/pipeline/automatic_region_enrich
+{
+  "description": "Ingest pipeline to enrich the data retrieving the region data from the area. Need to use scripts to rename fields, moving them from the inner document to the root one (using the rename processors cause problems with the enrich index).",
+  "processors": [
+    {
+      "enrich": {
+        "policy_name": "region_area_policy",
+        "field": "area",
+        "target_field": "temp"
+      }
+    },
+    {
+      "script": {
+        "lang": "painless",
+        "source": "ctx['NUTS1_code'] = ctx.temp.NUTS1_code;"
+      }
+    },
+    {
+      "script": {
+        "lang": "painless",
+        "source": "ctx['NUTS2_code'] = ctx.temp.NUTS2_code;"
+      }
+    },
+    {
+      "script": {
+        "lang": "painless",
+        "source": "ctx['region_ISTAT_code'] = ctx.temp.region_ISTAT_code;"
+      }
+    },
+    {
+      "script": {
+        "lang": "painless",
+        "source": "ctx['region_name'] = ctx.temp.region_name;"
+      }
+    },
+    {
+      "script": {
+        "description": "set administered_doses field",
+        "lang": "painless",
+        "source": "ctx['administered_doses'] = ctx['male_count']+ctx['female_count'];"
+      }
+    },
+	  {
+      "script": {
+        "description": "set fully_vaccinated_count field",
+        "lang": "painless",
+        "source": "ctx['fully_vaccinated_count'] = ctx['post_infection_doses']+ctx['second_doses'];"
+      }
+    },
+    {
+      "remove": {
+        "field": "temp"
+      }
+    },
+    {
+      "date": {
+        "field": "administration_date",
+        "timezone": "Europe/Rome",
+        "formats": [
+          "ISO8601"
+        ]
+      }
+    }
+  ]
+}
+
+#now you can finally execute the command
+POST /vaccinations/_doc?pipeline=automatic_region_enrich
+{
+  "administration_date": "2022-01-08",
+  "supplier": "Moderna",
+  "area": "EMR",
+  "age_group": "60-69",
+  "male_count": 10,
+  "female_count": 20,
+  "first_doses": 10,
+  "second_doses": 10,
+  "post_infection_doses": 5,
+  "booster_doses": 5
+}
+
+#problem: if you try to add two document with hte same region, only the first one works.
+#you have to re-execute the enrich policy to upload the second one with the same region
+#but if you remove the rename from the pipeline, it works.. but you get the subdocument....
+#problem solved: use scripts instead of the rename

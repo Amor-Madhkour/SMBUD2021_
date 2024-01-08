@@ -1,0 +1,56 @@
+{
+  "properties": {
+    "@timestamp": {
+      "type": "date"
+    },
+    "NUTS1_code": {
+      "type": "keyword"
+    },
+    "NUTS2_code": {
+      "type": "keyword"
+    },
+    "administration_date": {
+      "type": "date",
+      "format": "iso8601"
+    },
+    "age_group": {
+      "type": "keyword"
+    },
+    "area": {
+      "type": "keyword"
+    },
+    "booster_doses": {
+      "type": "long"
+    },
+    "female_count": {
+      "type": "long"
+    },
+    "first_doses": {
+      "type": "long"
+    },
+    "male_count": {
+      "type": "long"
+    },
+    "post_infection_doses": {
+      "type": "long"
+    },
+    "region_ISTAT_code": {
+      "type": "keyword"
+    },
+    "region_name": {
+      "type": "keyword"
+    },
+    "second_doses": {
+      "type": "long"
+    },
+    "supplier": {
+      "type": "keyword"
+    },
+	"administered_doses": {
+      "type": "long"
+    },
+	"fully_vaccinated_count": {
+      "type": "long"
+    }
+  }
+}

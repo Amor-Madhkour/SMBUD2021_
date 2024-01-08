@@ -1,0 +1,175 @@
+//given a person code and a test (date, result,address) creates the DOES relationship
+
+:param date => "2021-11-14";
+:param result => True;
+:param code => "XXXXXXXXXXXXXXX2";
+:param address => "new street 1";
+:param city => "new city";
+
+WITH datetime({epochmillis:apoc.date.parse($date, "ms", "yyyy-MM-dd")}) AS date
+MATCH (p:Person{code:$code})
+MERGE (c:City{name:$city})
+MERGE (place:Place{address:$address})-[:SITUATED_IN]->(c)
+MERGE (p)-[:DOES]->(t:Test{date:date,positive:$result})-[:PERFORMED_IN]->(place) 
+//as we decided, we don't reuse nodes
+-------------------------------------------------------
+-------------------------------------------------------
+
+//given a person code and a vaccination(vaccine name, date, address) creates the relationship TAKES for the vaccination
+
+:param code => "XXXXXXXXXXXXXXX2";
+:param date => "2021-11-14";
+:param vaccine_name => "Pfizer";
+:param address => "Devon Road 25"; //already exists
+:param city => "Salerno"; //already exits
+
+WITH datetime({epochmillis:apoc.date.parse($date, "ms", "yyyy-MM-dd")}) AS date
+MATCH (p: Person{code:$code})
+MERGE (c:City{name:$city})
+MERGE (place:Place{address:$address})-[:SITUATED_IN]->(c)
+MERGE (p)-[:TAKES]->(v: Vaccination {vaccine:$vaccine_name,date:date})-[:PERFORMED_IN]-(place)
+
+-------------------------------------------------------
+-------------------------------------------------------
+//given two person codes and the time creates the MEET relationship between the two people
+//if they didn't meet in the 10 minutes after or before the given time
+//robustness: check that the two people are different ones
+:param code1 => "XXXXXXXXXXXXXXX2";
+:param code2 => "XXXXXXXXXXXXXXX3";
+:param time => "2021-11-14 12:07:30";
+
+WITH datetime({epochmillis:apoc.date.parse($time, "ms", "yyyy-MM-dd HH:mm:ss")}) AS time
+MATCH 
+	(p1: Person{code:$code1}),
+	(p2: Person{code:$code2})
+WHERE p2<> p1 AND NOT EXISTS{ MATCH (p1)-[r:MEETS]-(p2) WHERE -10<=duration.inSeconds(r.time,time).minutes<=10 }
+CREATE (p1)-[:MEETS{time: time}]->(p2) //the direction is irrelevant
+//new version:
+WITH datetime({epochmillis:apoc.date.parse($time, "ms", "yyyy-MM-dd HH:mm:ss")}) AS time
+MATCH 
+    (p1: Person{code:$code1}),
+    (p2: Person{code:$code2})
+WHERE p2<> p1 
+AND NOT EXISTS{ 
+     MATCH (p1)-[r:MEETS]-(p2) 
+     WHERE -10<=duration.inSeconds(r.time,time).minutes<=10 
+}
+AND NOT EXISTS{
+        MATCH (p1)-[r:FREQUENTS]-(p2)
+        WHERE r.start_date<=time AND 
+              (r.end_date IS NULL OR r.start_date>=time)
+}
+CREATE (p1)-[:MEETS{time: time}]->(p2)
+
+//basic check done up to here
+-------------------------------------------------------
+-------------------------------------------------------
+//for instance, consider the case where a person takes a new job.
+//Given the old colleague sphere as a parameters list and the list of the new colleagues
+//the query sets the endDate of the ex_colleagues frequentation and creates the relationships with the new_colleague, if it's needed. 
+//Could be done for all kinds of FREQUENTS relationships (coworkers, housemates, friends, classmates, ..) 
+
+:param ex_colleagues => ["XXXXXXXXXXXXXXX1", "XXXXXXXXXXXXXX18","XXXXXXXXXXXXXXX3","XXXXXXXXXXXXXX25","XXXXXXXXXXXXXXX4"];
+:param new_colleagues => ["XXXXXXXXXXXXXX12", "XXXXXXXXXXXXXX13","XXXXXXXXXXXXXXX4"];
+:param code => "XXXXXXXXXXXXXXX4";
+:param change_date => "2021-11-14";
+
+
+//for robustness, make sure that both lists don't contain the person and remove from ex_colleagues any new_colleague (in that case the relation doens't end)
+WITH datetime({epochmillis:apoc.date.parse($change_date, "ms", "yyyy-MM-dd")}) AS change_date
+MATCH (p:Person{code:$code}) -[f:FREQUENTS]- (old_colleague:Person)
+WHERE old_colleague.code IN $ex_colleagues AND NOT old_colleague.code IN $new_colleagues AND old_colleague.code<>$code AND f.end_Date IS null 
+SET f.end_Date = change_date
+WITH DISTINCT p,change_date
+MATCH (new_colleague: Person) WHERE new_colleague.code IN $new_colleagues AND new_colleague.code<>$code
+	AND NOT EXISTS { MATCH (p)-[f:FREQUENTS]-(new_colleague) WHERE f.end_date IS null}
+CREATE (p)-[:FREQUENTS{start_date:change_date}]->(new_colleague)
+
+-------------------------------------------------------
+-------------------------------------------------------
+//TODO: CHECK THIS
+//notice that maybe in the following it should use MERGE and not CREATE
+
+//new event with given name, begin and end time. Given a list of people and their start and end time creates the PARTECIPATES relationship
+
+:param event => {name: "event_name", begin_date = "YYYY/MM/DDTHH:MM:SS", end_date = "YYYY/MM/DDTHH:MM:SS"}
+:param people => [{id: "code_1", begin_time = "YYYY/MM/DDTHH:MM:SS", end_time = "YYYY/MM/DDTHH:MM:SS"}, {id: "code_2", begin_time = "YYYY/MM/DDTHH:MM:SS", end_time = "YYYY/MM/DDTHH:MM:SS"}, ...]
+
+CREATE (e: Event{nome: $event.name, begin_date: datetime($event.begin_date, end_date: datetime($event.end_date})
+WITH e as event 
+UNWIND $people AS ps 
+MATCH (p: Person) 
+WHERE p.id = ps.id 
+CREATE (p) -[r: PARTECIPATES{begn_time: datetime($ps.begin_time, end_time: datetime($ps.end_time)}]-> (event)
+
+//idea for creating aggragations with optioanl parameters (end_time,city,address)
+//use WITH $parameter WHERE $parameter IS NOT NULL to filter
+//you may keep multiple whings with WITH and check parameter by parameter if it's not null and in tha case use SET
+//also consider the possibility of using this in the creation command to simplify it
+
+//possible commands:
+
+-------------------------------------------------------
+-------------------------------------------------------
+//given name, start_time, and optional end_time and address create the aggregation
+
+:param name => "aggregation_name"
+:param begin_time => "YYYY/MMM/DDTHH:MM:SS"
+:param end_time => "YYYY/MMM/DDTHH:MM:SS"
+:param address => [location:"street number",city:"city name"]
+
+CREATE (a: Aggregation {name: $name, start_date: datetime($begin_time)}
+WITH a AS aggr, $end_time as et
+WHERE et IS NOT null
+SET aggr.end_date = datetime(et)
+WITH aggr AS aggr, $address AS address
+WHERE address IS NOT null
+MERGE (c:City{name:$address.city)
+MERGE (place:Place{address: address.location}) - [:SITUATED_IN] -> (c)
+MERGE (aggr) - [:SITUATED_IN] -> (c)
+
+-------------------------------------------------------
+-------------------------------------------------------
+//end an aggregation given it's name, start_time and the time it has ended
+
+:param aggregation => {name: "aggregation_name", begin_time: "YYYY/MMM/DDTHH:MM:SS", end_time: "YYYY/MMM/DDTHH:MM:SS"}
+
+MATCH (a: Aggregation {name: $aggregation.name, begin_date: datetime($aggregation.begin_time)}
+WHERE a.end_date IS null //included for rubstness
+SET a.end_date = datetime($aggregation.end_time)
+
+-------------------------------------------------------
+-------------------------------------------------------
+//given a list of people, an aggregation name and start_time, add the list to the aggregation (participation time: the full aggregation)
+
+:param aggregation => {name: "aggr_name", begin_date: "YYYY/MM/DDTHH:MM:SS"}
+:param people => ["code_1", "code_2", ...]
+
+MATCH (a: Aggregation)
+WHERE a.name = $aggregation.name AND a.start_date = datetime($aggregation.begin_date)
+WITH a as aggr
+UNWIND $people ad ps  
+MATCH (p: Person {code: ps}) 
+MERGE (p) -[r: PARTECIPATES {start_time: aggr.begin_date, end_time: aggr.end_date}]-> (aggr)
+
+-------------------------------------------------------
+-------------------------------------------------------
+//given a list of people nad participation time, an aggregation name and start_time, add the list to the aggregation
+
+:param aggregation => {name: "aggr_name", begin_date: "YYYY/MM/DDTHH:MM:SS"}
+:param people => [{id: "code_1", start_time = "YYYY/MM/DDTHH:MM:SS", end_time = "YYYY/MM/DDTHH:MM:SS"}, {id: "code_2", start_time = "YYYY/MM/DDTHH:MM:SS", end_time = "YYYY/MM/DDTHH:MM:SS"}, ...]
+
+MATCH (a: Aggregation)
+WHERE a.name = $aggregation.name AND a.start_date = $aggregation.begin_date
+WITH a as aggr 
+UNWIND $people AS ps 
+MATCH (p: Person {code: ps.id}) 
+WHERE datetime(ps.start_time) >= aggr.begin_date AND datetime(ps.end_time) <= aggr.end_date
+MERGE (p) -[r: PARTECIPATES{begn_time: datetime(ps.start_time, end_time: datetime(ps.end_time)}]-> (aggr)
+
+
+//extra for those commands:
+//robustnes: no participation time is out of the aggregation time interval
+//robustness: when you end an aggregation, it has not ended yet (end_tiem is null) and check that the constraitn before this one holds
+//robustness: when you create or end an aggregation, check that it doesn't overlap with another aggregation with the same name
+//user-friendly: start_time becomes an optional parameter (except for the creation), you select the aggregation with the givne name that has startted after all the others

@@ -1,0 +1,15 @@
+These guidelines describe how to import the dashboard after the vaccinations index has been created.
+
+From Kibana, go to Stack Management->Saved Objects
+Click on import and select the file dashboard.ndjson
+Import it.
+
+Kibana will override the index pattern with the one saved along the dashboard.
+It's the default one and should work properly, 
+but if there are problems you can check "request action on conflict" and do not override it when prompted
+
+If the dashboard can't be imported or shown properly,
+you can import the file visualizations.ndjson following the same procedure of above.
+It will add the single visualizations to your library.
+You can create a new dashboard and add them: the layout, controls and texts of out dashboard aren't really important
+ 

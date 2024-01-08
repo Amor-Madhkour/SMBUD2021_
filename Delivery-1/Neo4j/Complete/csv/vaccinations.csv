@@ -1,0 +1,74 @@
+person,date,vaccine,address,city
+XXXXXXXXXXXXXXX8,2020-12-12,Pfizer,James Street 5,Firenze
+XXXXXXXXXXXXXXX8,2020-12-26,Pfizer,James Street 5,Firenze
+XXXXXXXXXXXXXX37,2021-01-25,Pfizer,Charles Street 4,Napoli
+XXXXXXXXXXXXXX37,2021-02-09,Pfizer,Charles Street 4,Napoli
+XXXXXXXXXXXXXXX3,2020-12-29,Pfizer,3rd Street East 3,Palermo
+XXXXXXXXXXXXXXX3,2021-01-12,Pfizer,3rd Street East 3,Palermo
+XXXXXXXXXXXXXXX4,2021-04-25,Pfizer,Jackson Avenue 12,Catania
+XXXXXXXXXXXXXXX4,2021-05-10,Pfizer,Jackson Avenue 12,Catania
+XXXXXXXXXXXXXX40,2020-11-04,Pfizer,Grove Street 28,Palermo
+XXXXXXXXXXXXXX40,2020-11-19,Pfizer,Grove Street 28,Palermo
+XXXXXXXXXXXXXX11,2021-02-02,Moderna,Evergreen Drive 21,Palermo
+XXXXXXXXXXXXXX11,2021-02-16,Moderna,Evergreen Drive 21,Palermo
+XXXXXXXXXXXXXX32,2021-01-02,AstraZeneca,Lawrence Street 4,Genova
+XXXXXXXXXXXXXX32,2021-01-16,AstraZeneca,Lawrence Street 4,Genova
+XXXXXXXXXXXXXX42,2021-04-16,Pfizer,Hanover Court 16,Roma
+XXXXXXXXXXXXXX42,2021-04-30,Pfizer,Hanover Court 16,Roma
+XXXXXXXXXXXXXX16,2021-04-24,Pfizer,2nd Street East 10,Firenze
+XXXXXXXXXXXXXX16,2021-05-08,Pfizer,2nd Street East 10,Firenze
+XXXXXXXXXXXXXX23,2021-06-26,Pfizer,Bay Street 15,Genova
+XXXXXXXXXXXXXX10,2020-12-15,AstraZeneca,Franklin Avenue 17,Napoli
+XXXXXXXXXXXXXX10,2020-12-30,AstraZeneca,Franklin Avenue 17,Napoli
+XXXXXXXXXXXXXXX6,2021-05-05,Pfizer,Creek Road 4,Milano
+XXXXXXXXXXXXXXX6,2021-05-19,Pfizer,Creek Road 4,Milano
+XXXXXXXXXXXXXX24,2021-03-28,Moderna,Aspen Court 11,Roma
+XXXXXXXXXXXXXX24,2021-04-11,Moderna,Aspen Court 11,Roma
+XXXXXXXXXXXXXX35,2021-02-22,Moderna,Jones Street 23,Roma
+XXXXXXXXXXXXXX35,2021-03-09,Moderna,Jones Street 23,Roma
+XXXXXXXXXXXXXX18,2021-06-16,Moderna,8th Street West 19,Bari
+XXXXXXXXXXXXXX18,2021-07-01,Moderna,8th Street West 19,Bari
+XXXXXXXXXXXXXX44,2021-02-24,Moderna,Church Street South 5,Palermo
+XXXXXXXXXXXXXX44,2021-03-11,Moderna,Church Street South 5,Palermo
+XXXXXXXXXXXXXX31,2020-12-27,Moderna,Vine Street 22,Milano
+XXXXXXXXXXXXXX31,2021-01-10,Moderna,Vine Street 22,Milano
+XXXXXXXXXXXXXX39,2020-11-21,AstraZeneca,Church Street South 27,Milano
+XXXXXXXXXXXXXX39,2020-12-05,AstraZeneca,Church Street South 27,Milano
+XXXXXXXXXXXXXX12,2021-05-15,Pfizer,Lakeview Drive 28,Roma
+XXXXXXXXXXXXXX12,2021-05-30,Pfizer,Lakeview Drive 28,Roma
+XXXXXXXXXXXXXX30,2020-12-17,AstraZeneca,Heather Lane 7,Palermo
+XXXXXXXXXXXXXX30,2020-12-31,AstraZeneca,Heather Lane 7,Palermo
+XXXXXXXXXXXXXX17,2021-04-13,AstraZeneca,Essex Court 15,Bologna
+XXXXXXXXXXXXXX17,2021-04-28,AstraZeneca,Essex Court 15,Bologna
+XXXXXXXXXXXXXXX9,2021-03-29,Pfizer,Orchard Street 14,Torino
+XXXXXXXXXXXXXXX9,2021-04-13,Pfizer,Orchard Street 14,Torino
+XXXXXXXXXXXXXX34,2021-05-24,AstraZeneca,Harrison Avenue 24,Torino
+XXXXXXXXXXXXXX34,2021-06-08,AstraZeneca,Harrison Avenue 24,Torino
+XXXXXXXXXXXXXX26,2020-11-29,Pfizer,12th Street 15,Genova
+XXXXXXXXXXXXXX26,2020-12-13,Pfizer,12th Street 15,Genova
+XXXXXXXXXXXXXX38,2021-05-30,Pfizer,Bay Street 8,Bari
+XXXXXXXXXXXXXX38,2021-06-13,Pfizer,Bay Street 8,Bari
+XXXXXXXXXXXXXX15,2021-05-27,Pfizer,Hawthorne Lane 10,Catania
+XXXXXXXXXXXXXX15,2021-06-11,Pfizer,Hawthorne Lane 10,Catania
+XXXXXXXXXXXXXX45,2021-01-30,AstraZeneca,Lakeview Drive 25,Genova
+XXXXXXXXXXXXXX45,2021-02-14,AstraZeneca,Lakeview Drive 25,Genova
+XXXXXXXXXXXXXX36,2021-06-07,AstraZeneca,8th Avenue 7,Roma
+XXXXXXXXXXXXXX36,2021-06-22,AstraZeneca,8th Avenue 7,Roma
+XXXXXXXXXXXXXX29,2021-04-12,AstraZeneca,8th Street West 9,Milano
+XXXXXXXXXXXXXX29,2021-04-27,AstraZeneca,8th Street West 9,Milano
+XXXXXXXXXXXXXX20,2021-04-17,AstraZeneca,Sherwood Drive 4,Torino
+XXXXXXXXXXXXXX20,2021-05-01,AstraZeneca,Sherwood Drive 4,Torino
+XXXXXXXXXXXXXX27,2020-12-25,Pfizer,Tanglewood Drive 4,Genova
+XXXXXXXXXXXXXX27,2021-01-09,Pfizer,Tanglewood Drive 4,Genova
+XXXXXXXXXXXXXX19,2021-03-12,Moderna,Creek Road 13,Firenze
+XXXXXXXXXXXXXX19,2021-03-27,Moderna,Creek Road 13,Firenze
+XXXXXXXXXXXXXX43,2020-12-25,Pfizer,Academy Street 29,Firenze
+XXXXXXXXXXXXXX43,2021-01-08,Pfizer,Academy Street 29,Firenze
+XXXXXXXXXXXXXX14,2020-11-04,Moderna,West Street 27,Milano
+XXXXXXXXXXXXXX14,2020-11-19,Moderna,West Street 27,Milano
+XXXXXXXXXXXXXX28,2021-04-20,Pfizer,Holly Court 28,Bari
+XXXXXXXXXXXXXX28,2021-05-05,Pfizer,Holly Court 28,Bari
+XXXXXXXXXXXXXXX0,2020-11-22,Moderna,Sherwood Drive 2,Palermo
+XXXXXXXXXXXXXXX0,2020-12-07,Moderna,Sherwood Drive 2,Palermo
+XXXXXXXXXXXXXX41,2020-12-03,Pfizer,Lawrence Street 1,Genova
+XXXXXXXXXXXXXX41,2020-12-18,Pfizer,Lawrence Street 1,Genova
