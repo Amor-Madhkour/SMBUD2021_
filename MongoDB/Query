@@ -1,0 +1,335 @@
+//number of vaccined used for the second dose in a given period
+//grouped by the brand
+var min_date = ISODate('2021-05-26T00');
+var max_date = ISODate('2021-06-27T00');
+db.certificates.aggregate(
+[
+  { 
+    $match:
+     {
+        "vaccinations.1":{$exists:1},
+        "vaccinations.1.issuing_date":
+       {   
+            $gte:min_date,
+            $lt:max_date}
+        }
+    },{
+       $project:
+       {
+          "second_dose":
+          {
+            $arrayElemAt:["$vaccinations",1]
+          }
+       } 
+    },{ 
+      "$group":
+        {
+          _id:"$second_dose.brand",
+          count:{$sum:1}
+        }
+    }
+])
+
+//vaccines used in a period grouped by brand
+db.certificates.aggregate([
+	{ $match:{"vaccinations.0":{$exists:1}}},
+	{ $unwind:"$vaccinations"},
+	{ $match:{
+		"vaccinations.issuing_date":{   
+            $gte:min_date,
+			$lte:max_date}
+        }
+	},
+	{ $group:
+        {
+          _id:"$vaccinations.brand",
+          count:{$sum:1}
+        }
+    },
+	{ $sort:{"count":-1}}
+])
+
+//PROBLEM: technically the last negative test after a positive one is the relevant one
+//current list of vaccinations taken by a person
+//(brand and date for each vaccination)
+//and the date of the last positive test
+//useful to be shown and considered when deciding which (and if) a new vaccination shall be done
+//assuming the brand of the last vaccinations is useful to decide which brand shall be used now 
+//(for instance, asking to the patient if he had any syntomps after some previous vaccinations)
+//and the number of vaccinations and the date of the last vaccination and test are useful to known
+//if the patiet can get a new vaccination now
+//note:the last positive test is not the last test
+var ssn="XXXXXXXXX1";
+db.certificates.aggregate([
+	{ $match:{"ssn":ssn} },
+	{ $project:{
+		"vaccinations":1,
+		"tests":1,
+		}
+	},
+	{ $unwind:{
+		path:"$tests",
+		preserveNullAndEmptyArrays: true
+		}
+	},
+	{ $match:{ //if there are no tests, I must match the single record I have
+		$or:[
+			{"test.positive":{"$exists":false} },
+			{"test.positive":true}]
+		} 
+	},
+	{ $group:{
+		_id:"$vaccinations",
+		"last_positive_test":{$max:"$tests.issuing_date"}
+		}
+	},
+	{ $project:{ //since _id is not meingful, change it to vaccinations
+		"_id":0,
+		"vaccinations":"$_id",
+		"last_positive_test":1
+		}
+	},
+	{ $project:{
+		"vaccinations.issuing_date":1,
+		"vaccinations.brand":1,
+		"last_positive_test":1 //null if there are no tests
+		}
+	}
+])
+
+//number of people with at least n vaccination in each city
+//assumes that the address is in the form "City, street number"
+var required_doses = 2;
+var max_results = 3;
+db.certificates.aggregate([
+	{ $project : { city : {
+		$arrayElemAt:[
+			{$split: ["$address", ", "]},
+			0]
+		},
+		vaccinations:"$vaccinations"
+		
+	} },
+	{ $match:{
+		$expr: { $gte: [{$size:"$vaccinations"}, required_doses]}
+		}
+	},
+	{ $group : { _id: "$city",count:{$sum:1} } }, 
+	{ $sort : {   "count" : -1 } },
+	{ $limit: max_results}
+]);
+
+
+//last vaccination (date and vaccine brand) and test (date and result) of a person
+//params: the person ssn
+//I prefer to use aggregate to make it more readable, but findOne should be enough
+//tested on a small example ,seems to work
+var ssn="XXXXXXXXX0";
+db.certificates.aggregate(
+	{ $match:{"ssn":ssn} },
+	{ $project:{
+		"vaccination":{$last:"$vaccinations"}, //no vaccination field if vaccination is empty
+		"test":{$last:"$tests"} //no test field if vaccination is empty
+		}
+
+	},
+	{ $project:{
+		"vaccination":{ //now if there aren't any vaccinatins this becomes an empty object {}
+			"issuing_date":"$vaccination.issuing_date",
+			"brand":"$vaccination.brand"
+		},
+		"test":{ //now if there aren't any tests this becomes an empty object {}
+			"issuing_date":"$test.issuing_date",
+			"positive":"$test.positive"
+		}}
+	}
+)
+//no comment version:
+db.certificates.aggregate(
+	{ $match:{"ssn":ssn} },
+	{ $project:{
+		"vaccination":{$last:"$vaccinations"},
+		"test":{$last:"$tests"}
+		}
+
+	},
+	{ $project:{
+		"vaccination":{
+			"issuing_date":"$vaccination.issuing_date",
+			"brand":"$vaccination.brand"
+		},
+		"test":{
+			"issuing_date":"$test.issuing_date",
+			"positive":"$test.positive"
+		}}
+	}
+)
+
+//find all organizations of a given type within a 40km raidus
+var longitude = 11.154773741824545;
+var latitude = 43.46253362118465;
+var radius = 10000;
+var required_type = "hospital"
+db.organizations.aggregate([
+   {
+     $geoNear: {
+        near: { type: "Point", coordinates: [longitude, latitude ] },
+        distanceField: "dist.calculated",
+        maxDistance: radius,
+		query: { service_type: required_type },
+        includeLocs: "dist.location",
+        spherical: true
+     }
+   },{$project:{"service_name":1, "dist.calculated":1,"gps_position.coordinates":1}}
+])
+
+//find the number, for each service_type, of organizations within a radius
+var longitude = 10.38202128236801;
+var latitude = 44.42362369006191;
+var radius = 40000;
+db.organizations.aggregate([
+   {
+     $geoNear: {
+        near: { type: "Point", coordinates: [longitude, latitude ] },
+        distanceField: "dist.calculated",
+        maxDistance: radius,
+        spherical: true
+     }
+   },
+   {$group : { _id: "$service_type",count:{$sum:1} } }
+])
+
+/*
+****************************
+Text search over description
+****************************
+The following query return all hospital from Massa in the description of which is included a string and is not present the word "entity", finally returns the results in order of relevance
+*/
+
+//to carry out the search it is necessary tu build and index on the field upon which to carry out the text search, to do so run:
+
+db.authorized_bodies.createIndex({description:"text"}) // in the index i put also the name so that the pattern matching of the string specifying the city may banefit from it, not sure if it does
+var max_results = 3;
+var pattern = "\"A very well known\" -emtity";
+db.organizations.find({
+	"$and":[
+		{"address":/^Sondrio/}, // the ^ optimizes the pattern matching specifying that such string must be present at the begin of the address.
+		{"service_type":"hospital"},
+		{$text:{$search:pattern}}
+	]
+}).sort({score: {$meta:"textScore"}}).limit(max_results)
+
+// when text searh is performed a score is computed depending on the quality of the matchings 
+
+
+//Query description (check is needed, test has to be within 6 month?)
+//people who got covid after last dose
+db.certificates.aggregate([
+	{$match:
+		{$and:
+			[{"vaccinations.1":{$exists:1}},
+			{"tests.0":{$exists:1}}] //at least one test done
+		}
+	},
+	{$project:{
+		"ssn":1,
+		"tests":1, 
+		"last_dose":{$last:"$vaccinations"}}
+	},
+	{$unwind:"$tests"},
+	{$match:{"tests.positive":true}},
+	{$match:{"$expr": { "$gt": ["$tests.issuing_date", "$last_dose.issuing_date"]}} },
+	{$group:{ _id: "$ssn"}}, //removes duplicates (a person who got multiple positive tests after the last dose counts once only)
+	{$count:"People who got covid after last dose"}
+])
+
+###################################################################################################################################################################################
+###Comandi
+//update many users emergency_contact to the same value
+db.certificates.updateMany(
+  {"ssn":{$in:["XXXXXXXX20","XXXXXXXX30","XXXXXXXX12"]}},
+    {$set: {"emergency_contact.name":"Allison Fritz",
+            "emergency_contact.phone_number":"1234500033",
+            "emergency_contact.email":"person33@something.com",
+            "emergency_contact.address":"Catania, Heather Lane 5"
+    }}
+      )
+      
+//add vaccine dose
+var ssn="XXXXXXXXX0";
+var issuing_date = ISODate('2021-12-18T00:00:00.000+00:00');
+var production_date = ISODate('2021-12-01T00:00:00.000+00:00');
+var address = "Catania, Chapel Street 29";
+var lot = "LLLLL80";
+var brand = "Moderna"
+var vaccine_type = "mRna";
+var employees = [{
+					bedge_id:"BBBBBB0",
+					role:"Doctor",
+					name:"Dana Howard"},
+					{
+						bedge_id:"BBBBB15",
+						role:"Nurse",
+						name:"Karen Calhoun"
+					}
+				];
+db.certificates.updateOne(
+	{"ssn":ssn},
+	{$push: {
+		vaccinations: {
+			issuing_date:issuing_date, 
+			address:address,
+			lot:lot,
+			brand:brand,
+			vaccine_type:vaccine_type,  
+			production_date:production_date,
+			employees:employees
+		}
+	}}
+)
+  
+    
+//add test to a specific person
+var ssn="XXXXXXXXX2";
+var issuing_date = ISODate('2021-12-01T00:00:00.000+00:00');
+var address = "Catania, Sycamore Lane 1";
+result = true;
+var employees = [
+				{
+				  bedge_id:"BBBBB15",
+				  role:"Nurse",
+				  name:"Karen Calhoun"
+				}
+			  ];
+db.certificates.updateOne(
+{"ssn":ssn},{
+ $push: {
+   tests: {
+		 issuing_date: issuing_date, 
+		  positive:result,
+		  address:address,
+		  employees: employees
+		}
+	}
+ }
+)
+
+
+//insert a new authorized_body
+var service_name = "NUOVA AZIENDA OSPEDALIERA 'S. MARIA' "
+var address = "Bologna, Edgewood Drive 4"
+var service_type = "pharmacy"
+var department = "Lombardia"
+var longitude = 11.154773741824545;
+var latitude = 43.46253362118465;
+db.organizations.insertOne({
+		service_name:service_name,
+		address:address,
+		service_type:service_type,
+		department:department,
+		gps_position:{
+			"type":"Point",
+			"coordinates":[longitude,latitude]
+		}
+	}
+)

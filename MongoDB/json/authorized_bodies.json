@@ -1,0 +1,1510 @@
+[
+{
+    "service_name": "ASST SPEC.ORT.TRAUMATOLOGICO G.PINI/CTO ",
+    "address": "Vicenza, Via Villa Cozza 24",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            11.332114032855513,
+            45.33225748683646
+        ]
+    }
+},
+{
+    "service_name": "AO UNIV. OO RR FOGGIA",
+    "address": "Aosta, Via Giovanni Niggeler 1 15",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            7.190736170306206,
+            45.444568455904744
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERO-UNIVERSITARIA DI FER",
+    "address": "Pesaro, Via Quasimodo 16",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.552008240833771,
+            43.54036016177027
+        ]
+    }
+},
+{
+    "service_name": "AZ. OSPEDALIERO - UNIVERSITARIA CAREGGI ",
+    "address": "Taranto, Piazza Nazario Sauro 27",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            17.143780047435282,
+            40.283691976599336
+        ]
+    }
+},
+{
+    "service_name": "A.O. S.GERARDO - MONZA",
+    "address": "Taranto, Via Banchi di Sopra 22",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            17.14058134883271,
+            40.28209919372904
+        ]
+    }
+},
+{
+    "service_name": "A.O.U. FEDERICO II DI NAPOLI",
+    "address": "Isernia, Via Ganunzio Bentini 18",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.144988346007315,
+            41.36145368307076
+        ]
+    }
+},
+{
+    "service_name": "ASST LARIANA",
+    "address": "Isernia, Piazza degli alberghi 30",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.14171759865004,
+            41.36289509445108
+        ]
+    }
+},
+{
+    "service_name": "A.O. OSPEDALE CIVILE - LEGNANO",
+    "address": "Benevento, Via Terrasanta 2",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.461619895474833,
+            41.08118621800296
+        ]
+    }
+},
+{
+    "service_name": "A.O. OSP.CIRC. FONDAZIONE MACCHI-VARESE ",
+    "address": "Bari, Via MONTE NERO 10",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.530358150987404,
+            41.07122590015856
+        ]
+    }
+},
+{
+    "service_name": "ASST DI MONZA ",
+    "address": "Benevento, Via Digello 16",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.46306059402253,
+            41.08029614278244
+        ]
+    }
+},
+{
+    "service_name": "AZ.OSP.UNIV.P.GIACCONE",
+    "address": "Perugia, Via A. Grandi 20",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.243094572643107,
+            43.07083567352344
+        ]
+    }
+},
+{
+    "service_name": "A.O.U. POLICLINICO - VITTORIO EMANUELE",
+    "address": "Chieti, 6 22",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.100338808373593,
+            42.211382085937
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA UNIVERSITARIA UNICAM",
+    "address": "Pesaro, Piazza G. Garibaldi 16",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.550356514073902,
+            43.54331807274797
+        ]
+    }
+},
+{
+    "service_name": "Azienda Osp. Univ. G. Martino",
+    "address": "Perugia, Via Luciano Orlando 14",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.240579552385599,
+            43.0709987941455
+        ]
+    }
+},
+{
+    "service_name": "ASST DI BERGAMO EST ",
+    "address": "Benevento, Via Donizetti 8",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.463283870113312,
+            41.084550499363445
+        ]
+    }
+},
+{
+    "service_name": "A.O. OSPEDALE DI LECCO - LECCO",
+    "address": "Taranto, Via Dei Gigli 8",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            17.140601684270376,
+            40.281872616363074
+        ]
+    }
+},
+{
+    "service_name": "A.O. S.GERARDO - MONZA",
+    "address": "Chieti, Via Carle 10",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.101245133228234,
+            42.21117221286359
+        ]
+    }
+},
+{
+    "service_name": "CENTRORIFERIMENTO ONCOLOGICO",
+    "address": "Reggio Calabria, Via Di Corte 6",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            15.391741113752882,
+            38.06146697836737
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERO-UNIVERSITARIA DI BOL",
+    "address": "Bari, Via Rimassa 21",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.534519091169912,
+            41.07005547464186
+        ]
+    }
+},
+{
+    "service_name": "A.O. S.CARLO BORROMEO - MILANO",
+    "address": "Pesaro, Corso  S. Trentin 8",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.554403464781672,
+            43.54150625061816
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA UNIVERSITARIA SENESE",
+    "address": "Reggio Calabria, Via Bonfanti 16",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            15.393219302041153,
+            38.06340887265788
+        ]
+    }
+},
+{
+    "service_name": "ISTITUTO TUMORI GIOVANNI PAOLO II",
+    "address": "Aosta, Via Malanotte 29",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            7.191904359645821,
+            45.441352543948014
+        ]
+    }
+},
+{
+    "service_name": "IST.G.GASLINI",
+    "address": "Vicenza, Via Benassi 8",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            11.331602679318012,
+            45.333606180447795
+        ]
+    }
+},
+{
+    "service_name": "A.O.SANTOBONO-PAUSILIPON",
+    "address": "Vicenza, Via Santa Maria Chiara 25",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            11.33106669941937,
+            45.3325041594333
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA VINCENZO MONALDI",
+    "address": "Bari, Viale  Calace 16",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.534402016827592,
+            41.07127471523669
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA REGIONALE S. CARLO",
+    "address": "Aosta, Via Mazzocchi 4",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            7.191258472563923,
+            45.44396479775705
+        ]
+    }
+},
+{
+    "service_name": "Azienda Osp.Bianchi-Melacrino-Morelli",
+    "address": "Perugia, Viale Mare Adriatico 21",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.241605239318359,
+            43.070519862755795
+        ]
+    }
+},
+{
+    "service_name": "A.O. OSPEDALI RIUNITI - BERGAMO ",
+    "address": "Reggio Calabria, P.zza Bronzetti 27",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            15.39430859608657,
+            38.06181056134499
+        ]
+    }
+},
+{
+    "service_name": "aorpapardopiemonte",
+    "address": "Perugia, Via Jacini 12",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.241001979644404,
+            43.07130891419608
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA DI PADOVA",
+    "address": "Reggio Calabria, Piazzale Provincie 3",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            15.393799833678704,
+            38.061067607281025
+        ]
+    }
+},
+{
+    "service_name": "A.O. SPEDALI CIVILI - BRESCIA ",
+    "address": "Pesaro, Via S. Miniato 19",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.552218290358388,
+            43.543814479328965
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA DI REGGIO EMILIA",
+    "address": "Bari, Via Altavilla 16",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.53205309908515,
+            41.071519071343374
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA DI COSENZA",
+    "address": "Benevento, Piazza S.Anna 3",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.464176192052498,
+            41.08020309998031
+        ]
+    }
+},
+{
+    "service_name": "CENTRORIFERIMENTO ONCOLOGICO",
+    "address": "Isernia, Piazza Silva 18",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.140186564753133,
+            41.36217774022012
+        ]
+    }
+},
+{
+    "service_name": "ASST DI PAVIA ",
+    "address": "Reggio Calabria, Piazza D. Alighieri 24",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            15.394768772164754,
+            38.06007404053562
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA MEYER ",
+    "address": "Perugia, Via Fratelli Dandolo 5",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.240781735997324,
+            43.07185612570574
+        ]
+    }
+},
+{
+    "service_name": "IRCCS Centro Neurolesi Bonino Pulejo",
+    "address": "Taranto, Via Daniele Manin 16",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            17.1415478843704,
+            40.28038158810803
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA G.BROTZU",
+    "address": "Taranto, Via Legnaghese 26",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            17.144627518881332,
+            40.283596172224776
+        ]
+    }
+},
+{
+    "service_name": "ASST DEL GARDA",
+    "address": "Benevento, Via  Torino 29",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.460166864702622,
+            41.08221529304234
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPED. NOVARA E GALLIATE",
+    "address": "Isernia, Via Di Coreglia 27",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.140812029060529,
+            41.36140779230575
+        ]
+    }
+},
+{
+    "service_name": "ASST DELLA VALLE OLONA",
+    "address": "Isernia, Via Provinciale Copparo 30",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.140678301350142,
+            41.36103284430746
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERO-UNIVERSITARIA DI BOL",
+    "address": "Bari, Via Flaminia Km. 39 24",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.530376610126073,
+            41.072994774148476
+        ]
+    }
+},
+{
+    "service_name": "A.O. S.ANTONIO ABATE - GALLARATE",
+    "address": "Benevento, Via Ottone Iii 18",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.464719551875326,
+            41.08242966820788
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA DI COSENZA",
+    "address": "Chieti, Via Regina 4",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.10400671038192,
+            42.21418495915558
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA DI REGGIO EMILIA",
+    "address": "Isernia, Via Vigan 27",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.144467321303893,
+            41.36178699517345
+        ]
+    }
+},
+{
+    "service_name": "AZ. OSPEDALIERO - UNIVERSITARIA CAREGGI ",
+    "address": "Isernia, Via Simoni 21",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.14248352645693,
+            41.36115093194723
+        ]
+    }
+},
+{
+    "service_name": "AO CITTA DELLA SALUTE E DELLA SCIENZA D",
+    "address": "Benevento, Via Luigi Caffaro 21",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.462755390790237,
+            41.08168353466377
+        ]
+    }
+},
+{
+    "service_name": "A.O. PAPA GIOVANNI XXIII",
+    "address": "Isernia, Via Pantanaccio 20",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.142744259948971,
+            41.36218390368005
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA S. G. MOSCATI",
+    "address": "Reggio Calabria, Viale dei Mille 9",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            15.392909761762795,
+            38.06287193562299
+        ]
+    }
+},
+{
+    "service_name": "OSPEDALE POLICLINICO S. MATTEO - PAVIA",
+    "address": "Chieti, Via Sebastiano Satta 15",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.100432080931602,
+            42.21018133121495
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPED. NOVARA E GALLIATE",
+    "address": "Reggio Calabria, Via Onorato Vigliani 8",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            15.393143715669805,
+            38.06110190395624
+        ]
+    }
+},
+{
+    "service_name": "IOV",
+    "address": "Aosta, Via Collomb 21",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            7.193941467596466,
+            45.443127873221144
+        ]
+    }
+},
+{
+    "service_name": "ASST SANTI PAOLO E CARLO",
+    "address": "Bari, Via Queirolo 18",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.532909537788793,
+            41.07419211675212
+        ]
+    }
+},
+{
+    "service_name": "ASST DI LODI",
+    "address": "Pesaro, Piazzale Gorini 23",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.554115330770273,
+            43.541279215128206
+        ]
+    }
+},
+{
+    "service_name": "A.O. S.ANTONIO ABATE - GALLARATE",
+    "address": "Perugia, Via Bentivoglio 6",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.243662402803231,
+            43.073444878096346
+        ]
+    }
+},
+{
+    "service_name": "A.O. OSPEDALE DI CIRCOLO - MELEGNANO",
+    "address": "Aosta, C.so Umberto 11",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            7.1947963885830015,
+            45.44182022328416
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERO-UNIVERSITARIA PISANA",
+    "address": "Pesaro, Via dei Malatesta 13",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.551447286665189,
+            43.54314657447253
+        ]
+    }
+},
+{
+    "service_name": "ASST DI CREMA ",
+    "address": "Isernia, Piazza Martiri 3 Aprile 2",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.140428567345444,
+            41.36372788454436
+        ]
+    }
+},
+{
+    "service_name": "ASST DEGLI SPEDALI CIVILI DI BRESCIA",
+    "address": "Taranto, Piazza Martin Luther King 5/6 30",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            17.14299768700097,
+            40.283386467624716
+        ]
+    }
+},
+{
+    "service_name": "A.O. S.CARLO BORROMEO - MILANO",
+    "address": "Bari, Viale Anicio Gallo 10",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.53157043751873,
+            41.073977664365124
+        ]
+    }
+},
+{
+    "service_name": "A.zienda Ospedaliera dei Colli",
+    "address": "Isernia, Via Montesanto 12 26",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.142775778104099,
+            41.36375740002955
+        ]
+    }
+},
+{
+    "service_name": "ASST SANTI PAOLO E CARLO",
+    "address": "Isernia, Piazzale Ionio 15",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.144678653273099,
+            41.360794394994166
+        ]
+    }
+},
+{
+    "service_name": "A.O. OSPEDALI RIUNITI - BERGAMO ",
+    "address": "Taranto, Via Francesca Uggia 1",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            17.143856094275066,
+            40.28230938881413
+        ]
+    }
+},
+{
+    "service_name": "Azienda Osp. Univ. G. Martino",
+    "address": "Vicenza, Via Dusmet 30",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            11.333419234396017,
+            45.33237252542637
+        ]
+    }
+},
+{
+    "service_name": "OSPEDALE MAURIZIANO UMBERTO I - TORINO",
+    "address": "Isernia, Piazza Molinari 11",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.142244099927007,
+            41.36158693187155
+        ]
+    }
+},
+{
+    "service_name": "OSPEDALE BIANCHI - MELACRINO - MORELLI",
+    "address": "Perugia, Via Alcide De Gasperi N.2 2",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.243605748058458,
+            43.0704338396832
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERO-UNIVERSITARIA",
+    "address": "Vicenza, Via Sulcitana 14",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            11.330291667399209,
+            45.33072261473395
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA S. MARIA - TERNI",
+    "address": "Pesaro, Via S. Vigilio 10",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.550078546435849,
+            43.541755619693205
+        ]
+    }
+},
+{
+    "service_name": "Azienda Osp. Univ. G. Martino",
+    "address": "Bari, Via di Bellariva 1",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.534499693857594,
+            41.071744677352065
+        ]
+    }
+},
+{
+    "service_name": "ASST DELLA VALTELLINA E DELLALTO LARIO ",
+    "address": "Benevento, Piazza Don Annichini 15",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.462832297325875,
+            41.0831926446987
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA DI PERUGIA",
+    "address": "Isernia, Via Taormina 23/c 18",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.143892915201166,
+            41.36483392938717
+        ]
+    }
+},
+{
+    "service_name": "ISTITUTO DELLE SCIENZE NEUROLOGICHE DI B",
+    "address": "Isernia, Piazza commestibile 26",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.143735574546625,
+            41.36399684648444
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERO UNIVERSITARIA S.LUIG",
+    "address": "Pesaro, Viale Suzzani 18 12",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.552383799410846,
+            43.543495340809
+        ]
+    }
+},
+{
+    "service_name": "A.O. LUIGI SACCO - MILANO ",
+    "address": "Bari, Viale Cappello 25",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.5332488225066,
+            41.07133074899384
+        ]
+    }
+},
+{
+    "service_name": "ASST GRANDE OSPEDALE METROPOLITANO NIGUA",
+    "address": "Bari, Via Tribunali 1",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.53085744320948,
+            41.071718306784796
+        ]
+    }
+},
+{
+    "service_name": "A.O. SANTANNA E SAN SEBASTIANOCASERTA",
+    "address": "Bari, Via Marelli 26",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.53123288932077,
+            41.074810640585156
+        ]
+    }
+},
+{
+    "service_name": "AZ.OSP.UNIVERSITARIA INTEGRATA VERONA",
+    "address": "Pesaro, Via Orbassano 10",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.554721662163976,
+            43.54056824274113
+        ]
+    }
+},
+{
+    "service_name": "A.O. DELLA PROVINCIA DI LODI",
+    "address": "Pesaro, Via Margherita 12",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.551082134770962,
+            43.54139008851206
+        ]
+    }
+},
+{
+    "service_name": "A.O. SANTANNA E SAN SEBASTIANOCASERTA",
+    "address": "Chieti, Piazza Miani 19",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.103739753532073,
+            42.21252726980917
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA O.I.R.M.S.-SANTANNA",
+    "address": "Bari, Viale Rinascita 21",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.53425590346772,
+            41.07352299827707
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA UNIVERSITARIA UNICAM",
+    "address": "Bari, VIA TRINITA' N. 43 16",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.53230979966268,
+            41.07213090546024
+        ]
+    }
+},
+{
+    "service_name": "A.O. SPEDALI CIVILI - BRESCIA ",
+    "address": "Pesaro, Via Conte Alaimo 30",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.55403988483447,
+            43.54395642231706
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERO-UNIVERSITARIA PISANA",
+    "address": "Bari, Via Terrazze 21",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.53046722713863,
+            41.07346229017557
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPED. UNIVERSITARIA SASSARI",
+    "address": "Bari, Via Statale Stelvio 15",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            16.53178162357063,
+            41.07122438204603
+        ]
+    }
+},
+{
+    "service_name": "A.O.OO.RR.S.GIOVANNI DI DIO E RUGGI D`AR",
+    "address": "Taranto, Via LIVATINO 25",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            17.142725044538622,
+            40.28180844215642
+        ]
+    }
+},
+{
+    "service_name": "AZ.OSP.UNIVERSITARIA INTEGRATA VERONA",
+    "address": "Pesaro, Via Palmiro Togliatti Ang. Via Basso 14",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.55087105928209,
+            43.544082863594895
+        ]
+    }
+},
+{
+    "service_name": "ASST PAPA GIOVANNI XXIII",
+    "address": "Taranto, Via San Rocco 17",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            17.143284194421913,
+            40.28050017844557
+        ]
+    }
+},
+{
+    "service_name": "A.O. OSPEDALE MAGGIORE - CREMA",
+    "address": "Vicenza, Via Giacomini 29",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            11.333060340296443,
+            45.33422005802706
+        ]
+    }
+},
+{
+    "service_name": "FOND.IRCCS IST.NAZ.NEUROLOGICO C.BESTA-M",
+    "address": "Taranto, Via Lampedusa 6",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            17.14360047137839,
+            40.28013021516509
+        ]
+    }
+},
+{
+    "service_name": "INMI L.SPALLANZANI - IRCCS",
+    "address": "Benevento, Via Don Giovanni Schiavi 29",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.461989843313878,
+            41.083590015667475
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA DI COSENZA",
+    "address": "Pesaro, Via per Iolo 30",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.552196254808253,
+            43.54108380701983
+        ]
+    }
+},
+{
+    "service_name": "AOU CITTA DELLA SALUTE E DELLA SCIENZA ",
+    "address": "Isernia, Piazza Guido Rossa 23",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.143827510885812,
+            41.36433761479159
+        ]
+    }
+},
+{
+    "service_name": "FOND.IRCCS IST.NAZ.NEUROLOGICO C.BESTA",
+    "address": "Aosta, Piazza  Mazzini 15",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            7.190833062824375,
+            45.440739158476134
+        ]
+    }
+},
+{
+    "service_name": "AO CITTA DELLA SALUTE E DELLA SCIENZA D",
+    "address": "Reggio Calabria, P.zza Principessa Clotilde 30",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            15.390325036266216,
+            38.06151440750364
+        ]
+    }
+},
+{
+    "service_name": "AZIENDA OSPEDALIERA SAN SALVATORE",
+    "address": "Isernia, Via Cascina Gianfranco 19",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.144022728691453,
+            41.36364413378375
+        ]
+    }
+},
+{
+    "service_name": "aorpapardopiemonte",
+    "address": "Taranto, 23 21",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            17.140320964679688,
+            40.28330560940084
+        ]
+    }
+},
+{
+    "service_name": "ASST PAPA GIOVANNI XXIII",
+    "address": "Vicenza, Via Federico Avio 27",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            11.334512114857368,
+            45.33081950350233
+        ]
+    }
+},
+{
+    "service_name": "ISTITUTO TUMORI GIOVANNI PAOLO II",
+    "address": "Isernia, Piazza del Maccarese 25",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.142208745187068,
+            41.362223923675614
+        ]
+    }
+},
+{
+    "service_name": "ASST DI LECCO ",
+    "address": "Isernia, Strada Statale 406 11",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.143575826794628,
+            41.36173104843682
+        ]
+    }
+},
+{
+    "service_name": "AZ. OSPEDALIERO - UNIVERSITARIA CAREGGI ",
+    "address": "Isernia, Via Olmetto 13",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.141212972352799,
+            41.36332025014544
+        ]
+    }
+},
+{
+    "service_name": "Azienda Ospedaliera Papardo",
+    "address": "Aosta, Via C. V. Emanuele 7",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            7.193886032021214,
+            45.44366912364997
+        ]
+    }
+},
+{
+    "service_name": "POLICLINICO U. I",
+    "address": "Pesaro, Viale dei Bizantini 8",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.552935991967496,
+            43.542406222942105
+        ]
+    }
+},
+{
+    "service_name": "A.O. OSPEDALI RIUNITI - BERGAMO ",
+    "address": "Vicenza, Via Antonio Gramsci 155 25",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            11.330339085762875,
+            45.33465343292617
+        ]
+    }
+},
+{
+    "service_name": "A.O. SPEDALI CIVILI - BRESCIA ",
+    "address": "Isernia, Serravalle di Carda 24",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.14367557433098,
+            41.3633735536091
+        ]
+    }
+},
+{
+    "service_name": "MANENTI",
+    "address": "Pesaro, Strada S. Giov. Galermo 30",
+    "service_type": "pharmacy",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.553203614938809,
+            43.54428071758223
+        ]
+    }
+},
+{
+    "service_name": "COMUNALE 25",
+    "address": "Taranto, Via T. Nuzzichi 3",
+    "service_type": "pharmacy",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            17.144358818442008,
+            40.28259651939685
+        ]
+    }
+},
+{
+    "service_name": "FONDAZIONE ORDINE MAURIZIANO",
+    "address": "Isernia, P.za Monte Gaudio 9",
+    "service_type": "pharmacy",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.144552655470713,
+            41.3628337125902
+        ]
+    }
+},
+{
+    "service_name": "FARMACIA SAN MARTINO dottori GENNERO",
+    "address": "Reggio Calabria, Via Don Brarda 27",
+    "service_type": "pharmacy",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            15.394283038648345,
+            38.060515370999866
+        ]
+    }
+},
+{
+    "service_name": "MONUMENTO",
+    "address": "Reggio Calabria, Via De Santis 3",
+    "service_type": "pharmacy",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            15.391486716536939,
+            38.06243094487864
+        ]
+    }
+},
+{
+    "service_name": "SAN CARLO",
+    "address": "Pesaro, Piazza M. Quintieri 22",
+    "service_type": "pharmacy",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.553554398697745,
+            43.54389218503561
+        ]
+    }
+},
+{
+    "service_name": "IMPRESA SAS DELLA DR.SSA BRUZZONE PATRIZIA E C.",
+    "address": "Reggio Calabria, Via Marzan 12",
+    "service_type": "pharmacy",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            15.392491099217391,
+            38.063052548930834
+        ]
+    }
+},
+{
+    "service_name": "EUROPEA DR.I AUDIBERTI EMANUELA E CAMILLI MELETANI MICHELANGELO SNC",
+    "address": "Aosta, Via Balestri 29",
+    "service_type": "pharmacy",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            7.192818576041687,
+            45.444262130619336
+        ]
+    }
+},
+{
+    "service_name": "BRACCIO SAS DELLA DR.SSA FASSIO CLAUDIA E C.",
+    "address": "Chieti, Viale Felsina 8",
+    "service_type": "pharmacy",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.104164167540295,
+            42.21040861158126
+        ]
+    }
+},
+{
+    "service_name": "MARIA CRISTINA",
+    "address": "Aosta, Via C.Lequio 21",
+    "service_type": "pharmacy",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            7.190111572258288,
+            45.444683147250224
+        ]
+    }
+},
+{
+    "service_name": "COMUNALE 36 - AFC",
+    "address": "Chieti, Via G. Sarto 17",
+    "service_type": "pharmacy",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.104774149332108,
+            42.21398651408343
+        ]
+    }
+},
+{
+    "service_name": "COMUNALE 35",
+    "address": "Benevento, Via Antonini 9",
+    "service_type": "pharmacy",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.464511455275789,
+            41.0825048225973
+        ]
+    }
+}
+]

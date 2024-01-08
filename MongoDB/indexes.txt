@@ -1,0 +1,9 @@
+
+//certificate primary key
+db.certificates.createIndex( {"ssn": 1}, { unique: true } )
+
+//organizations primary key
+db.organizations.createIndex( {"service_name": 1,"address": 1}, { unique: true } )
+
+//organizations spatial queries
+db.organizations.createIndex( { gps_position: "2dsphere" } )

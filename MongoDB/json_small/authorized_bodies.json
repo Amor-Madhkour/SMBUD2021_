@@ -1,0 +1,67 @@
+[
+{
+    "service_name": "AZIENDA OSPEDALIERA PADOVA",
+    "address": "Rieti, Piazzale Resistenza 14",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            12.523171985124085,
+            42.22271149652781
+        ]
+    }
+},
+{
+    "service_name": "A.O. OSPEDALE CIVILE - VIMERCATE",
+    "address": "Como, Largo Bianchieri 11",
+    "service_type": "hospital",
+    "department": "Lombardy",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            9.05178024464682,
+            45.484023310646116
+        ]
+    }
+},
+{
+    "service_name": "SPEDALI RIUNITI ",
+    "address": "Caltanissetta, Piazza Bortone 11",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.044511472355907,
+            37.29485844009677
+        ]
+    }
+},
+{
+    "service_name": "ISTITUTO DELLE SCIENZE NEUROLOGICHE DI B",
+    "address": "Avellino, Corso Don Luigi Sturzo 26",
+    "service_type": "hospital",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            14.470445051854613,
+            40.55327887364071
+        ]
+    }
+},
+{
+    "service_name": "Farmacia Millefonti S.n.c.",
+    "address": "Mantova, Corso Re Umberto 22",
+    "service_type": "pharmacy",
+    "department": "Tuscany",
+    "gps_position": {
+        "type": "Point",
+        "coordinates": [
+            10.471165715583053,
+            45.09122633189978
+        ]
+    }
+}
+]
